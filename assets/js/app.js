@@ -122,6 +122,112 @@ var appObj = {
 
 
 };
+  var appObj = {
+      currentUser: {
+          userName: "",
+
+      },
+      createUserDetails: {
+          userName: "",
+          name: "",
+          email: "",
+          password: "",
+          favs: {
+            link1: ""
+          }
+      },
+        userLogin: function(event){
+            event.preventDefault();
+            var userUser = $(".Username").val();
+            appObj.currentUser.userName = userUser;
+            var userPass = $(".Password").val();
+          //   console.log(userPass);
+            try {
+                database.ref("dbo_users_table/users/" + userUser).once("value",function(snapshot){
+                var ref = snapshot;
+              //   console.log(ref);
+              //   console.log(ref.child("password"));
+                if (ref.child("password").exists()){
+                      if (ref.child("password").val() === userPass) {
+                          //alert("Succussfull Login!");
+                          localStorage.setItem("username",userUser);
+                      } else {
+                          alert("Incorrect password!");
+                      }
+                } else {
+                    alert("user does not exist!");
+                }
+              });
+                
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        createUser: function(event){
+            vent.preventDefault();
+            var userUser = $(".username").val().toLowerCase();
+            var userPass = $(".password").val();
+            try {
+                database.ref("dbo_users_table/users").once("value",function(snapshot){
+                    if (snapshot.child(userUser).exists()){
+                        alert("Username already taken!");
+                    } else {
+                        //get user details from page
+                        var newUser = {
+                            // userName = $().val();
+                            // name = $().val();
+                            // email = $().val();
+                            // password = $().val();
+                        }
+                        database.ref("dbo_users_table/users").update({newUser});
+                    }
+                });
+                
+            } catch (error) {
+                console.error(error)
+            }
+        },
+        load: function(){
+            //appObj.checkLocalData(); //local storage added but turned off for debugging
+            database.ref("dbo_users_table/users/" + appObj.currentUser.userName).once("value",function(snapshot){
+                if (snapshot.child("password").exists()){
+                    //user logged in from memory, prevents form from loading.
+                    return;
+                } else {
+                    var form = $("<form>");
+                    var label1 = $("<label>");
+                    label1.text("Enter Username");
+                    var label2 = $("<label>");
+                    label2.text("Enter Password");
+                    var userName = $("<input>");
+                    userName.addClass("Username");
+                    userName.attr("type","text");
+                    var password = $("<input>");
+                    password.addClass("Password");
+                    password.attr("type","password");
+                    var submit = $("<button>");
+                    submit.attr("type","button");
+                    submit.addClass("loginButton");
+                    submit.text("SUBMIT");
+                    submit.on("click",appObj.userLogin);
+                    form.append(label1,$("<br>"),userName,$("<br>"),label2,$("<br>"),password,$("<br>"),submit);
+                    var loginDiv = $("<div>");
+                    loginDiv.addClass("loginDiv");
+            
+                    $(loginDiv).append(form);
+                    $(".container").append(loginDiv);
+                }
+             });
+        },
+        checkLocalData: function(){
+            try {
+                appObj.currentUser.userName = localStorage.getItem("username");
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+  };
 
   // creating initial database
 
