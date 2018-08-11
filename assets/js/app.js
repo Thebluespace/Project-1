@@ -66,29 +66,29 @@ var config = {
           }
         
   };
+  function load(){
+        var form = $("<form>");
+        var label1 = $("<label>");
+        label1.text("Please enter Username");
+        var label2 = $("<label>");
+        label2.text("Please enter your password");
+        var userName = $("<input>");
+        userName.addClass("username");
+        userName.attr("type","text");
+        var password = $("<input>");
+        password.addClass("password");
+        password.attr("type","password");
+        var submit = $("<button>");
+        submit.attr("type","button");
+        submit.addClass("loginButton");
+        submit.text("SUBMIT");
+        submit.on("click",userLogin);
+        form.append(label1,$("<br>"),userName,$("<br>"),label2,$("<br>"),password,$("<br>"),submit);
+        var loginDiv = $("<div>");
+        loginDiv.addClass("loginDiv");
 
-  // for login testing
-//   function load(){
-//         var form = $("<form>");
-//         var label1 = $("<label>");
-//         label1.text("Please enter Username");
-//         var label2 = $("<label>");
-//         label2.text("Please enter your password");
-//         var userName = $("<input>");
-//         userName.addClass("username");
-//         userName.attr("type","text");
-//         var password = $("<input>");
-//         password.addClass("password");
-//         password.attr("type","password");
-//         var submit = $("<button>");
-//         submit.attr("type","button");
-//         submit.addClass("loginButton");
-//         submit.text("SUBMIT");
-//         submit.on("click",userLogin);
-//         form.append(label1,$("<br>"),userName,$("<br>"),label2,$("<br>"),password,$("<br>"),submit);
-//         $(".container").append(form);
-        
-//   }
+        $(loginDiv).append(form);
+        $(".container").append(loginDiv);
 
   // creating initial database
 
