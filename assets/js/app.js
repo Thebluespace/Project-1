@@ -89,6 +89,7 @@ var config = {
 
         $(loginDiv).append(form);
         $(".container").append(loginDiv);
+  }
 
   // creating initial database
 
