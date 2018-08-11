@@ -55,7 +55,11 @@ var config = {
         submit.text("SUBMIT");
         submit.on("click",userLogin);
         form.append(label1,$("<br>"),userName,$("<br>"),label2,$("<br>"),password,$("<br>"),submit);
-        $(".container").append(form);
+        var loginDiv = $("<div>");
+        loginDiv.addClass("loginDiv");
+
+        $(loginDiv).append(form);
+        $(".container").append(loginDiv);
         
   }
 

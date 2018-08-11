@@ -21,9 +21,18 @@ body {
   }
   
   .neon {
+    display: none;
     color: #fff;
     text-shadow:
-      0 0 20px #fff
+      0 0 20px #fff;
+      
+      
+  }
+  .loginDiv {
+    margin-top: 15%;
+    text-align: center;
+    background-color: grey;
+    opacity: .9;
   }
 
   
