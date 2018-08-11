@@ -10,51 +10,62 @@ var config = {
 
   var database = firebase.database();
 
-  function userLogin(event){
-      event.preventDefault();
-      var userUser = $(".username").val().toLowerCase();
-      var userPass = $(".password").val();
-    //   console.log(userPass);
-      try {
-          database.ref("dbo_users_table/users/" + userUser).once("value",function(snapshot){
-          var ref = snapshot;
-        //   console.log(ref);
-        //   console.log(ref.child("password"));
-          if (ref.child("password").exists()){
-                if (ref.child("password").val() === userPass) {
-                    alert("Succussfull Login!");
-                } else {
-                    alert("Incorrect password!");
-                }
-          } else {
-              alert("user does not exist!");
+  var appObj = {
+      createUserDetails: {
+          userName: "",
+          name: "",
+          email: "",
+          password: "",
+          favs: {
+            link1: ""
           }
-        });
-          
-      } catch (error) {
-          console.error(error);
-      }
-  }
-
-  function createUser(event){
-    vent.preventDefault();
-    var userUser = $(".username").val().toLowerCase();
-    var userPass = $(".password").val();
-    try {
-        database.ref("dbo_users_table/users").once("value",function(snapshot){
-            if (snapshot.chi(userUser)){
-                alert("Username already taken!");
-            } else {
-                database.ref("dbo_users_table/users").update(3)
+      },
+        userLogin: function(event){
+            event.preventDefault();
+            var userUser = $(".username").val().toLowerCase();
+            var userPass = $(".password").val();
+          //   console.log(userPass);
+            try {
+                database.ref("dbo_users_table/users/" + userUser).once("value",function(snapshot){
+                var ref = snapshot;
+              //   console.log(ref);
+              //   console.log(ref.child("password"));
+                if (ref.child("password").exists()){
+                      if (ref.child("password").val() === userPass) {
+                          alert("Succussfull Login!");
+                      } else {
+                          alert("Incorrect password!");
+                      }
+                } else {
+                    alert("user does not exist!");
+                }
+              });
+                
+            } catch (error) {
+                console.error(error);
             }
-
-        });
+        },
+        createUser: function(event){
+            vent.preventDefault();
+            var userUser = $(".username").val().toLowerCase();
+            var userPass = $(".password").val();
+            try {
+                database.ref("dbo_users_table/users").once("value",function(snapshot){
+                    if (snapshot.chi(userUser)){
+                        alert("Username already taken!");
+                    } else {
+                        //get user details from page
+                        var newUser = createUserDetails
+                        database.ref("dbo_users_table/users").update({newUser});
+                    }
+                });
+                
+            } catch (error) {
+                console.error(error)
+            }
+          }
         
-    } catch (error) {
-        console.error(error)
-    }
-  }
-
+  };
 
   // for login testing
 //   function load(){
