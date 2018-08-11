@@ -67,14 +67,14 @@ var config = {
         load: function(){
             var form = $("<form>");
             var label1 = $("<label>");
-            label1.text("Please enter Username");
+            label1.text("Enter Username");
             var label2 = $("<label>");
-            label2.text("Please enter your password");
+            label2.text("Enter Password");
             var userName = $("<input>");
-            userName.addClass("username");
+            userName.addClass("Username");
             userName.attr("type","text");
             var password = $("<input>");
-            password.addClass("password");
+            password.addClass("Password");
             password.attr("type","password");
             var submit = $("<button>");
             submit.attr("type","button");
