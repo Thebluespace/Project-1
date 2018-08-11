@@ -80,7 +80,7 @@ var config = {
             submit.attr("type","button");
             submit.addClass("loginButton");
             submit.text("SUBMIT");
-            submit.on("click",userLogin);
+            submit.on("click",appObj.userLogin);
             form.append(label1,$("<br>"),userName,$("<br>"),label2,$("<br>"),password,$("<br>"),submit);
             var loginDiv = $("<div>");
             loginDiv.addClass("loginDiv");
