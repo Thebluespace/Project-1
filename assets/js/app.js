@@ -234,6 +234,10 @@ var database = firebase.database();
         }
   };
 
+  
+
+  
+
   // creating initial database
 
 //   var users = {
