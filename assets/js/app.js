@@ -187,42 +187,45 @@ var database = firebase.database();
                     submit.addClass("loginButton");
                     submit.text("SUBMIT");
                     submit.on("click",appObj.userLogin);
-                    form.append(label1,$("<br>"),userName,$("<br>"),label2,$("<br>"),password,$("<br>"),submit);
+                    form.append(label1,$("<br>"),userName,$("<br>"),label2,$("<br>"),password,$("<br>"),submit,addUser);
                     var loginDiv = $("<div>");
                     loginDiv.addClass("loginDiv");
             
                     $(loginDiv).append(form);
-                    $(".container").append(loginDiv);
+                    $("#container").append(loginDiv);
                 }
              });
         },
         createAccount: function(event) {
-       
-            $(".loginDiv").hide();
-            var adduserform = $("<form>");
-            var label2 = $("<label>");
-            label2.text("Enter New Username");
-            var label3 = $("<label>");
-            label3.text("Enter New Password");
-            var label4 = $("<label>").text("Please enter your name");
-            var lebel5 = $("<label>").text("Please enter an email");
-            var userRealName = $("<input>").addClass("realname").attr("type","text");
-            var userEmail = $("<input>").addClass("userEmail").attr("type","text");
-            var newUserName = $("<input>");
-            newUserName.addClass("newUserName");
-            newUserName.attr("type","text");
-            var newPassword = $("<input>");
-            newPassword.addClass("newPassword");
-            newPassword.attr("type","password");
-            var submit2 = $("<button>");
-            submit2.text("submit");
-            submit2.attr("type","button");
-            submit2.addClass("submit2button");
-            submit2.on("click",appObj.createUser);
-           adduserform.append(label2,$("<br>"),newUserName,$("<br>"),label4,$("<br>"),userRealName,$("<br>"),label5,$("<br>"),userEmail,$("<br>"),label3,$("<br>"),newPassword,$("<br>"),submit2,);
-           var newUserDiv = $("<div>");1
-           $(newUserDiv).append(adduserform);
-           $(".container").append(newUserDiv);
+            try {
+                $(".loginDiv").hide();
+                var adduserform = $("<form>");
+                var label2 = $("<label>");
+                label2.text("Enter New Username");
+                var label3 = $("<label>");
+                label3.text("Enter New Password");
+                var label4 = $("<label>").text("Please enter your name");
+                var label5 = $("<label>").text("Please enter an email");
+                var userRealName = $("<input>").addClass("realname").attr("type","text");
+                var userEmail = $("<input>").addClass("userEmail").attr("type","text");
+                var newUserName = $("<input>");
+                newUserName.addClass("newUserName");
+                newUserName.attr("type","text");
+                var newPassword = $("<input>");
+                newPassword.addClass("newPassword");
+                newPassword.attr("type","password");
+                var submit2 = $("<button>");
+                submit2.text("submit");
+                submit2.attr("type","button");
+                submit2.addClass("submit2button");
+                submit2.on("click",appObj.createUser);
+                adduserform.append(label2,$("<br>"),newUserName,$("<br>"),label4,$("<br>"),userRealName,$("<br>"),label5,$("<br>"),userEmail,$("<br>"),label3,$("<br>"),newPassword,$("<br>"),submit2,);
+                var newUserDiv = $("<div>").addClass("newUserDiv");
+                $(newUserDiv).append(adduserform);
+                $("#container").append(newUserDiv);
+            } catch (error) {
+                    console.error(error);
+            }
            
         },
         checkLocalData: function(){
