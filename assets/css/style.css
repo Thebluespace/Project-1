@@ -6,43 +6,219 @@ body {
     color: whitesmoke;
     font-size: 20px;
     font-family:space;
+    display: flex;
+    justify-content: center;
+    overflow:hidden;
+    position:relative;
+
 }
 
-     :root {
-    font-size: calc(1vw + 1vh + 1.5vmin);
+:root {
+      font-size: calc(1vw + 1vh + 1.5vmin);
+  }
+
+  .topnav a{
+  text-align:center; 
+  padding:2%;
+  color:white;
+  font-size:80%;
+  font-family: space;
+  text-shadow:
+  0 0 10% rgb(192, 220, 238);
+  }
+
+  .image1 {
+      padding:20%;
+      margin-left:0%;
   }
   
    h1 {
-      padding:50px;
-    font-weight: 500;
+       color: white;
+       position:fixed;
+       float:center;
+    font-weight: 485%;
     text-align: center;
     text-transform: uppercase;
-    font-size:75px;
-  }
-  
-  .neon {
-    display: none;
-    color: #fff;
+    font-size:550%;
+    text-shadow: 150%;
+    margin-top:6%;
+    margin-left:-2%;
     text-shadow:
-      0 0 20px #fff;
-      
-      
-  }
-  .loginDiv {
-    padding:25px;
-    border:25px;
+    0 0 60px rgb(207, 60, 60);
+    white-space: nowrap;   
+}
+
+.loginDiv {
+    padding:20%;
     margin-top: 25%;
-    margin-left: 435px;
+    margin-left: 37%;
     text-align: center;
     background-color: none;
     opacity: .9;
     width:25%;
-    -webkit-text-stroke-width: .50px;
+    -webkit-text-stroke-width: 100%;
     -webkit-text-stroke-color: black;
     font-size: 35px;
     font-family:space;
-
-
   }
+
+  .typewriter{
+      margin-top:4%;
+  }
+
+  .typewriter h2 {
+    color: white;
+    font-family: monospace;
+    font-size:111%;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid orange; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .20em; /* Adjust as needed */
+    animation: 
+      typing 5s steps(40, end),
+      blink-caret .75s step-end;
+      max-width:95%;
+      -webkit-text-stroke-width: 100%;
+      -webkit-text-stroke-color: black;
+  }
+
+  .typewriter h3 {
+    color: white;
+    font-family: monospace;
+    font-size:111%;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .20em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end   infinite;
+    max-width:95%;
+    -webkit-animation-delay: 3s;
+    -webkit-animation-fill-mode: both;
+}
+
+.typewriter h4 {
+    color: white;
+    font-family: monospace;
+    font-size:111%;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .20em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end   infinite;
+    max-width:95%;
+    -webkit-animation-delay: 6s;
+    -webkit-animation-fill-mode: both;
+}
+
+.typewriter h5 {
+    color: white;
+    font-family: monospace;
+    font-size:111%;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .20em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end   infinite;
+    max-width:95%;
+    -webkit-animation-delay: 9s;
+    -webkit-animation-fill-mode: both;
+}
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+  }
+
+.screen {
+    animation:colorPulse 5s infinite ease-in-out;
+    box-shadow:0 0 5% 1% #000 inset;
+    box-sizing:border-box;
+    font-family:'Fira Mono', monospace;
+    font-size:20px;
+    height:20%;
+    overflow:hidden;
+    padding:50%;
+    width:50%;
+  }
+  
+  .screen:before {
+    animation:wave 10s infinite ease-in-out;
+    content:"";
+    height:20vh;
+    left:0;
+    opacity:.5;
+    position:absolute;
+    right:0;
+    z-index:1;
+  }
+  
+  .screen:after {
+    background-image:linear-gradient(transparent, transparent 3px, #222);
+    background-size:10% 4px;
+    bottom:0;
+    content:"";
+    left:0;
+    pointer-events:none;
+    position:absolute;
+    right:0;
+    top:0;
+    z-index:2;
+  }
+  
+  p:last-child:after {
+    animation:blink 1s infinite;
+    content:"_";
+  }
+  
+  @keyframes colorPulse {
+    0%, 100% {
+      color:#0c0;
+    }
+    48%, 52% {
+      color:#090;
+    }
+    50% {
+      color:#060;
+    }
+  }
+  
+  @keyframes wave {
+    0% {
+      box-shadow:0 -10vh 20vh #0c0;
+      top:-100vh;
+    }
+    48%, 52% {
+      box-shadow:0 -10vh 20vh #090;
+    }
+    50% {
+      box-shadow:0 -10vh 20vh #060;
+    }
+    100% {
+      box-shadow:0 -10vh 20vh #0c0;
+      top:200vh;
+    }
+}
+  
+  @keyframes blink {
+    50% {
+      opacity:0;
+    }
+  }
+
+  
 
   
