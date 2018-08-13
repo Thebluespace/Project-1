@@ -114,7 +114,6 @@ var config = {
                 console.error(error);
             }
         }
-
   };
 
   // creating initial database
