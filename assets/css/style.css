@@ -44,5 +44,19 @@ body {
 
 
   }
+  .newUserDiv {
+    padding:25px;
+    border:25px;
+    margin-top: 25%;
+    margin-left: 435px;
+    text-align: center;
+    background-color: none;
+    opacity: .9;
+    width:25%;
+    -webkit-text-stroke-width: .50px;
+    -webkit-text-stroke-color: black;
+    font-size: 35px;
+    font-family:space;
+  }
 
   
