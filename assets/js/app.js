@@ -144,8 +144,8 @@ var database = firebase.database();
                             //get user details from page
                             var newUser = {
                                 userName: $(".newUserName").val(),
-                                name = $(".userRealName").val(),
-                                email = $(".userEmail").val(),
+                                name: $(".userRealName").val(),
+                                email: $(".userEmail").val(),
                                 password: $(".newPassword").val()
                             }
                             database.ref("dbo_users_table/users").update({newUser})
