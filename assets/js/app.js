@@ -199,32 +199,32 @@ var database = firebase.database();
   // creating initial database
   // user structure
 
-  var users = {
-      "tecgreene93": {
-        name: "Thomas Greene",
-        emai: "tecgreene93@gmail.com",
-        password : "welcome1",
-        favs: {
+//   var users = {
+//       "tecgreene93": {
+//         name: "Thomas Greene",
+//         emai: "tecgreene93@gmail.com",
+//         password : "welcome1",
+//         favs: {
 
-        }
-      },
-      "rajones704": {
-        name: "Rich Jones",
-        emai: "rajones704@gmail.com",
-        password : "welcome1",
-        favs: {
+//         }
+//       },
+//       "rajones704": {
+//         name: "Rich Jones",
+//         emai: "rajones704@gmail.com",
+//         password : "welcome1",
+//         favs: {
 
-        }
-      },
-      "treybrewer21": {
-        name: "Trey Brewer",
-        emai: "trey.brewer21@yahoo.com",
-        password : "welcome1",
-        favs: {
+//         }
+//       },
+//       "treybrewer21": {
+//         name: "Trey Brewer",
+//         emai: "trey.brewer21@yahoo.com",
+//         password : "welcome1",
+//         favs: {
 
-        }
-      }
-  };
+//         }
+//       }
+//   };
 
 
 //   var apis = {
@@ -243,5 +243,5 @@ var database = firebase.database();
 //   'q': "Mars"
 // });
 
-  database.ref("dbo_users_table").update({users});
+  //database.ref("dbo_users_table").update({users});
     //database.ref("dbo_api_table").update({apis});
