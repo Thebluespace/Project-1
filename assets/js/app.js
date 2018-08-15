@@ -70,7 +70,7 @@ var appObj = {
                             "email": email,
                             "password": password
                         });
-                        
+                        appObj.currentUser.userName = userUser;
                         var h1 = $("<h4>");
                         h1.text("User created successfully!");
                         $(".newUserDiv").append(h1);
@@ -78,7 +78,6 @@ var appObj = {
                             $(".newUserDiv").remove();
                             appObj.loginComplete();
                         }, 1500);
-
                     }
                 }
             });
@@ -120,7 +119,6 @@ var appObj = {
                 submit.addClass("loginButton");
                 submit.text("Submit");
                 submit.on("click", appObj.userLogin);
-                // >>>>>>>>>I
                 form.append(label1, $("<br>"), userName, $("<br>"), label2, $("<br>"), password, $("<br>"), submit, addUser);
                 var loginDiv = $("<div>");
                 loginDiv.addClass("loginDiv");
@@ -131,7 +129,9 @@ var appObj = {
     },
     logLoad: function () {
         try {
-            appObj.nyApiCall();
+            $(".articles").hide();
+            appObj.newsApiCall();
+            $(".articles").show();
         } catch (error) {
             console.error(error);
         }
@@ -175,41 +175,41 @@ var appObj = {
             console.error(error);
         }
     },
-    nyApiCall: function () {
+    newsApiCall: function () {
         try {
-            var queryUrl = "https://newsapi.org/v2/top-headlines?q=mars&category=science&apiKey=56a5a397e2874610a264ec99b80d5d92";
+            var queryUrl = "https://newsapi.org/v2/everything?q=mars%20AND%20nasa%20NOT%20musk%20AND%20tesla&language=en&sortBy=publishedAt&apiKey=56a5a397e2874610a264ec99b80d5d92";
             $.ajax({
                 url: queryUrl,
                 method: "GET"
-            }).done(function (result) {
+            }).done(function(result) {
                 console.log(result);
                 var articles = result.articles;
-                for (i = 0; i < articles.length; i++) {
+                for (i = 0; i < 3; i++){
                     try {
-                        if (articles[i].title != "") {
+                        if (articles[i].title != ""){
                             var tr = $("<tr>");
                             var td = $("<td>");
                             td.text(articles[i].source.name);
                             var td1 = $("<td>");
                             td1.text(articles[i].title);
                             var anchor = $("<a>");
-                            anchor.attr("target", "_blank");
-                            anchor.attr("href", articles[i].url);
+                            anchor.attr("target","_blank");
+                            anchor.attr("href",articles[i].url);
                             anchor.text("Click here to read");
                             var td2 = $("<td>");
                             td2.append(anchor);
-                            tr.append(td, td1, td2);
+                            tr.append(td,td1,td2);
                             $(".articleTable").append(tr);
                         }
                     } catch (error) {
                         console.error(error);
                     }
                 }
-            }).fail(function (err) {
+            }).fail(function(err) {
                 console.error(err);
             });
         } catch (error) {
-            console.error(error);
+         console.error(error);
         }
     },
     getFromServer: function () {
