@@ -197,6 +197,13 @@ body {
     animation:blink 1s infinite;
     content:"_";
   }
+  .rover {
+    padding:20%;
+    margin-top: 0%;
+    margin-right: 0%;
+    width: 40%;
+    height: 40%;
+  }
   
   @keyframes colorPulse {
     0%, 100% {
@@ -232,6 +239,7 @@ body {
       opacity:0;
     }
   }
+
 
   
 

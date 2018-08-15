@@ -91,6 +91,7 @@ var database = firebase.database();
         },
         load: function(){
             appObj.getFromServer();
+            appObj.nasaApi();
             //appObj.checkLocalData(); //local storage added but turned off for debugging
             database.ref("dbo_users_table/users/" + appObj.currentUser.userName).once("value",function(snapshot){
                 if (snapshot.child("password").exists()){
@@ -168,13 +169,23 @@ var database = firebase.database();
         },
         nyApiCall: function(){
             try {
-                var queryUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-                queryUrl += '?' + "q=Mars&api-key=936b6f0cf05a4e3ca7afc7ba77b3115e";
+                var queryUrl = "https://newsapi.org/v2/everything?q=mars&apiKey=56a5a397e2874610a264ec99b80d5d92";
                 $.ajax({
                     url: queryUrl,
                     method: "GET"
                 }).done(function(result) {
                     console.log(result);
+                    var articles = result.articles;
+                    for (i = 0; i < articles.length; i++){
+                        try {
+                            if (articles[i].title != ""){
+                                var tr = $("<tr>");
+                                //td
+                            }
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
                 }).fail(function(err) {
                     console.error(err);
                 });
@@ -190,6 +201,36 @@ var database = firebase.database();
             } catch (error) {
                 console.error(error);
             }
+        },
+        nasaApi: function () {
+            var queryURL = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=dFJonK0i9i110qJccM4dRWZ3bXEgu2U2moofcFHT";
+     
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+                var intervalId;
+                function decrement() {
+     
+                    //  Decrease number by one.
+                    number--;
+                    console.log(number);
+                    var imageURL = response.photos[number].img_src;
+                    var imageBuild = $("<img>");
+                    var image = imageBuild.attr("src", imageURL);
+                    image.addClass("rover");
+                    $(".container-fluid").html(image);
+                    if (number === 0) {
+                        number = 856;
+                    };
+                }
+     
+                number = 856;
+                intervalId = setInterval(decrement, 2 * 1000);
+
+     
+                //  The decrement function.
+            })
         }
   };
 
