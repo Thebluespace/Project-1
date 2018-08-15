@@ -11,13 +11,9 @@ body {
   overflow:hidden;
   position:relative;
 }
-
- .nav-item {
-   z-index: 1;
-   color: white;
- }
-  
-
+.nav-item {
+  z-index: 1;
+}
 :root {
     font-size: calc(1vw + 1vh + 1.5vmin);
 }
