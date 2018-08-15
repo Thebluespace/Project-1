@@ -38,17 +38,25 @@ a {
 
 
 .loginDiv {
-  padding:20%;
-  margin-top: 25%;
-  margin-left: 37%;
+  margin-top: -125%;
+  margin-bottom: 0%;
+  margin-left: 40%;
   text-align: center;
-  background-color: none;
+  background-color: none; 
   opacity: .9;
   width:25%;
   -webkit-text-stroke-width: 100%;
   -webkit-text-stroke-color: black;
-  font-size: 35px;
+  font-size: 24px;
   font-family:space;
+  z-index: 1;
+}
+.loginButton {
+  height: 45%;
+  margin-left: 0%;
+  margin-right: 10%;
+  margin-top: 10%;
+
 }
 .typewriter{
     display:block;
@@ -191,21 +199,22 @@ max-width:95%;  text-shadow:
 -webkit-animation-fill-mode: both;
 }
 .newUserDiv {
-  padding:25px;
   border:25px;
-  margin-top: 25%;
-  margin-left: 435px;
+  margin-top: -130%;
+  margin-bottom: 0%;
+  margin-left: 40%;
   text-align: center;
   background-color: none;
   opacity: .9;
   width:25%;
   -webkit-text-stroke-width: .50px;
   -webkit-text-stroke-color: black;
-  font-size: 35px;
+  font-size: 24px;
   font-family:space;
 }
-
-
+.submit2button {
+  margin-top: 10%;
+}
 @keyframes typing {
   from { width: 0 }
   to { width: 100% }
