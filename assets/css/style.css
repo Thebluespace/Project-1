@@ -12,9 +12,15 @@ body {
   position:relative;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+  background-color: transparent;
+  }
+  
+
  .nav-item {
    z-index: 1;
-   color: white;
 }
 
 :root {
@@ -166,6 +172,32 @@ max-width:95%;  text-shadow:
 -webkit-animation-fill-mode: both;
 
 }
+
+.typewriter h6{
+  padding:2%;
+  position:absolute;
+  color: white;
+font-weight: 485%;
+text-align: center;
+text-transform: uppercase;
+font-size:250%;
+text-shadow: 150%;
+margin-left:10%;
+margin-bottom:-25%;
+text-shadow:
+0 0 20px rgb(145, 8, 19);
+overflow: hidden; 
+white-space: nowrap;   
+border-right: .15em solid orange; /* The typwriter cursor */
+margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+letter-spacing: .20em; /* Adjust as needed */
+animation: 
+typing 3.5s steps(40, end),
+blink-caret .75s step-end;
+max-width:95%;  text-shadow:
+0 0 200px rgb(139, 7, 13);
+-webkit-animation-fill-mode: both;
+}
 .newUserDiv {
   border:25px;
   margin-top: -130%;
@@ -267,8 +299,20 @@ p:last-child:after {
   }
 }
 
+#mars-article {
+  border:white;
+  align:center;
+  padding:10%;
 
-
+}
+  
+.app{
+  padding:20%;
+}
+  
+.map{
+  padding:2%;
+}
   
 
   
