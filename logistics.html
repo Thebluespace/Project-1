@@ -14,13 +14,14 @@
         </script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="assets/js/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/js/app.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4LFD0kCPk7FHzHCAN8VDnAZUwvVEhXsg&callback=initMap"></script>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 </head>
-<body>
+
+<body onload="appObj.logLoad();">
     <div class="row">
         <div class="container-fluid" id="container">
             <div class="topnav">
@@ -55,7 +56,18 @@
                                     <span class="flow-text" id="app">App</span>
                                 </div>
                             </div>
-
+                            <table id="articles">
+                                <thead>
+                                    <tr>
+                                        <th>Source</th>
+                                        <th>Title</th>
+                                        <th>Link</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="articleTable">
+                                </tbody>
+                            </table>
+                            <div id="map" style='width: 400px; height: 300px;'></div>
                             <div class="screen">
                             </div>
                         </div>
