@@ -247,6 +247,8 @@ var database = firebase.database();
                 //  The decrement function.
             })
         }
+
+        
   };
   
   // creating initial database
