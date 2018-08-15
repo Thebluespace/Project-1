@@ -62,20 +62,15 @@ var appObj = {
                         alert("Username already taken!");
                     } else {
                         //get user details from page
-                        var userName = $(".newUserName").val();
                         var name = $(".realname").val();
                         var email = $(".userEmail").val();
                         var password = $(".newPassword").val();
-                        // database.ref("dbo_users_table/users").update(userUser);
                         database.ref("dbo_users_table/users/" + userUser).update({
                             "name": name,
                             "email": email,
                             "password": password
-                        })
-                        console.log(userName);
-                        console.log(name);
-                        console.log(email);
-                        console.log(password);
+                        });
+                        
                         var h1 = $("<h4>");
                         h1.text("User created successfully!");
                         $(".newUserDiv").append(h1);
@@ -97,7 +92,6 @@ var appObj = {
     load: function () {
         appObj.getFromServer();
         appObj.Begin();
-        //appObj.nasaApi();
         // appObj.checkLocalData(); //local storage added but turned off for debugging
         database.ref("dbo_users_table/users/" + appObj.currentUser.userName).once("value", function (snapshot) {
             if (snapshot.child("password").exists()) {
@@ -269,6 +263,109 @@ var appObj = {
     },
 };
 
+//googe maps functions
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 0, lng: 0},
+      zoom: 1,
+      streetViewControl: false,
+      mapTypeControlOptions: {
+        mapTypeIds: ['mars']
+      }
+    });
 
+    var marsMapType = new google.maps.ImageMapType({
+      getTileUrl: function(coord, zoom) {
+          var mars = {
+            location: "mw1.google.com/mw-planetary/mars/elevation",
+            name: 'elevation',
+            zoomlevels: 9,
+            copyright: 'NASA / JPL / GSFC / Arizona State University',
+            caption: 'A shaded relief map color-coded by altitude'
+          }
+          var link = makeMarsMapType(mars)
+          return link;
+      },
+      tileSize: new google.maps.Size(256, 256),
+      maxZoom: 9,
+      minZoom: 0,
+      radius: 1738000,
+      name: 'Mars'
+    });
 
+    map.mapTypes.set('mars', marsMapType);
+    map.setMapTypeId('mars');
+  }
 
+  // Normalizes the coords that tiles repeat across the x axis (horizontally)
+  // like the standard Google map tiles.
+  function getNormalizedCoord(coord, zoom) {
+    var y = coord.y;
+    var x = coord.x;
+
+    // tile range in one direction range is dependent on zoom level
+    // 0 = 1 tile, 1 = 2 tiles, 2 = 4 tiles, 3 = 8 tiles, etc
+    var tileRange = 1 << zoom;
+
+    // don't repeat across y-axis (vertically)
+    if (y < 0 || y >= tileRange) {
+      return null;
+    }
+
+    // repeat across x-axis
+    if (x < 0 || x >= tileRange) {
+      x = (x % tileRange + tileRange) % tileRange;
+    }
+
+    return {x: x, y: y};
+  }
+
+  // google maps function
+  function makeMarsMapType(m) {
+    var opts = {
+      baseUrl: 'https://' + m.location + '/',
+      getTileUrl: function(tile, zoom) {
+        var bound = Math.pow(2, zoom);
+        var x = tile.x;
+        var y = tile.y;
+  
+        // Don't repeat across y-axis (vertically).
+        if (y < 0 || y >= bound) {
+          return null;
+        }
+  
+        // Repeat across x-axis.
+        if (x < 0 || x >= bound) {
+          x = (x % bound + bound) % bound;
+        }
+  
+        var qstr = 't';
+        for (var z = 0; z < zoom; z++) {
+          bound = bound / 2;
+          if (y < bound) {
+            if (x < bound) {
+              qstr += 'q';
+            } else {
+              qstr += 'r';
+              x -= bound;
+            }
+          } else {
+            if (x < bound) {
+              qstr += 't';
+              y -= bound;
+            } else {
+              qstr += 's';
+              x -= bound;
+              y -= bound;
+            }
+          }
+        }
+        return 'https://' + m.location + '/' + qstr + '.jpg';
+      },
+      tileSize: new google.maps.Size(256, 256),
+      maxZoom: m.zoomlevels - 1,
+      minZoom: 0,
+      name: m.name.charAt(0).toUpperCase() + m.name.substr(1)
+    };
+    return new google.maps.ImageMapType(opts);
+}
