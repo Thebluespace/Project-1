@@ -290,7 +290,7 @@ function initMap() {
       maxZoom: 9,
       minZoom: 0,
       radius: 1738000,
-      name: 'Mars'
+      name: 'mars'
     });
 
     map.mapTypes.set('mars', marsMapType);
