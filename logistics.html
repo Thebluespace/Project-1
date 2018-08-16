@@ -19,6 +19,8 @@
     <script src="assets/js/app.js"></script>
     <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4LFD0kCPk7FHzHCAN8VDnAZUwvVEhXsg&callback=initMap"></script> -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <link rel="icon" type="image/jpg" href="assets/images/favicon.jpg">
+
 </head>
 
 <body onload="appObj.logLoad();">
@@ -37,40 +39,47 @@
                     </li>
                 </ul>
 
-            <div class="row">
-                <div class="container">
+                <div class="row">
+                    <div class="container">
 
-                    <div class="typewriter">
-                        <h6>Now let's go to MARS!</h6>
-                    </div>
-
-                    <div class="row">
-                        <div class="col s6 push-s6">
-
-                            <span class="flow-text" id="map">Map</span>
+                        <div class="typewriter">
+                            <h6>Now let's go to MARS!</h6>
                         </div>
-
                         <div class="row">
                             <div class="col s6 pull-s6">
-                                <div class="app">
-                                    <span class="flow-text" id="app">App</span>
+                                <div class="roverPics">
+
                                 </div>
                             </div>
-                            <table id="articles">
-                                <thead>
-                                    <tr>
-                                        <th>Source</th>
-                                        <th>Title</th>
-                                        <th>Link</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="articleTable">
-                                </tbody>
-                            </table>
-                            <div id="map" style='width: 400px; height: 300px;'></div>
-                            <div class="screen">
-                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col s6 push-s6">
+
+                                <span class="flow-text" id="map">Map</span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col s6 pull-s6">
+                                    <div class="app">
+                                        <span class="flow-text" id="app">App</span>
+                                    </div>
+                                </div>
+                                <table id="articles">
+                                    <thead>
+                                        <tr>
+                                            <th>Source</th>
+                                            <th>Title</th>
+                                            <th>Link</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="articleTable">
+                                    </tbody>
+                                </table>
+                                <div id="map" style='width: 400px; height: 300px;'></div>
+                                <div class="screen">
+                                </div>
+                            </div>
+
 </body>
 
 </html>
