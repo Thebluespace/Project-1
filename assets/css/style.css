@@ -38,7 +38,8 @@ a {
 
 
 .loginDiv {
-  margin-top: -125%;
+  margin-top: -150%;
+  padding-bottom: 10%;
   margin-bottom: 0%;
   margin-left: 40%;
   text-align: center;
@@ -213,7 +214,7 @@ max-width:95%;  text-shadow:
   font-family:space;
 }
 .submit2button {
-  margin-top: 10%;
+  margin-top: 100%;
 }
 @keyframes typing {
   from { width: 0 }
