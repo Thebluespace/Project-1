@@ -18,6 +18,9 @@ a {
   background-color: transparent;
   }
   
+  .rover{
+    display:block;
+  }
 
  .nav-item {
    z-index: 1;
@@ -28,6 +31,7 @@ a {
 }
 
 .image1 {
+  position: inherit;
     display:block;
     padding:20%;
     margin-left:0%;
@@ -216,6 +220,13 @@ max-width:95%;  text-shadow:
 .submit2button {
   margin-top: 100%;
 }
+
+#articles {
+display:block;
+padding:20%;
+}
+
+
 @keyframes typing {
   from { width: 0 }
   to { width: 100% }
@@ -300,20 +311,4 @@ p:last-child:after {
   }
 }
 
-#mars-article {
-  border:white;
-  align:center;
-  padding:10%;
 
-}
-  
-.app{
-  padding:20%;
-}
-  
-.map{
-  padding:2%;
-}
-  
-
-  
