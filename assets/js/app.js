@@ -91,6 +91,7 @@ var appObj = {
     load: function () {
         appObj.getFromServer();
         appObj.Begin();
+        
         // appObj.checkLocalData(); //local storage added but turned off for debugging
         database.ref("dbo_users_table/users/" + appObj.currentUser.userName).once("value", function (snapshot) {
             if (snapshot.child("password").exists()) {
@@ -131,6 +132,7 @@ var appObj = {
         try {
             $(".articles").hide();
             appObj.newsApiCall();
+            appObj.nasaApi();
             $(".articles").show();
         } catch (error) {
             console.error(error);
@@ -235,7 +237,7 @@ var appObj = {
                 var image = imageBuild.attr("src", imageURL);
                 image.addClass("rover");
                 $(".rover").remove();
-                $(".container-fluid").append(image);
+                $(".roverPics").append(image);
                 if (number === 0) {
                     number = 856;
                 };
