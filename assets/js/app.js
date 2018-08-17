@@ -194,7 +194,7 @@ var appObj = {
                 url: queryUrl,
                 method: "GET"
             }).done(function(result) {
-                console.log(result);
+                //console.log(result);
                 var articles = result.articles;
                 for (i = 0; i < 3; i++){
                     try {
@@ -241,16 +241,20 @@ var appObj = {
         }).then(function (response) {
             var intervalId;
             function decrement() {
-                number--;
-                var imageURL = response.photos[number].img_src;
-                var imageBuild = $("<img>");
-                var image = imageBuild.attr("src", imageURL);
-                image.addClass("rover");
-                $(".rover").remove();
-                $(".roverPics").append(image);
-                if (number === 0) {
-                    number = 856;
-                };
+                try {
+                    number--;
+                    var imageURL = response.photos[number].img_src;
+                    var image = $("<img>");
+                    image.attr("src", imageURL);
+                    image.addClass("rover");
+                    $(".rover").remove();
+                    $(".roverPics").append(image);
+                    if (number === 0) {
+                        number = 856;
+                    };
+                } catch(err){
+                    console.error(error);
+                }
             }
             number = 856;
             intervalId = setInterval(decrement, 4000);
