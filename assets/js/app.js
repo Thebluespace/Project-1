@@ -23,8 +23,6 @@ var appObj = {
             link1: ""
         }
     },
-
-
     userLogin: function (event) {
         var userUser = $(".Username").val();
         appObj.currentUser.userName = userUser;
@@ -34,7 +32,7 @@ var appObj = {
                 var ref = snapshot;
                 if (ref.child("password").exists()) {
                     if (ref.child("password").val() === userPass) {
-                        localStorage.setItem("username", userUser);
+                        sessionStorage.setItem("username", userUser);
                         $(".loginDiv").remove();
                     } else {
                         alert("Incorrect password!");
@@ -71,6 +69,7 @@ var appObj = {
                             "password": password
                         });
                         appObj.currentUser.userName = userUser;
+                        sessionStorage.setItem("username",userUser);
                         var h1 = $("<h4>");
                         h1.text("User created successfully!");
                         $(".newUserDiv").append(h1);
@@ -130,6 +129,17 @@ var appObj = {
     },
     logLoad: function () {
         try {
+            appObj.currentUser.userName = sessionStorage.getItem("username");
+            if (appObj.currentUser.userName == "" || appObj.currentUser.userName == null){
+                var form = $("<h1>");
+                form.text("User is not logged in! Redirecting to landing page...");
+                $("#articles").remove();
+                $("#row").append(form);
+                setTimeout(function(){
+                window.location.href = "index.html";
+                },1500);
+                return;
+            }
             $(".articles").hide();
             appObj.newsApiCall();
             appObj.nasaApi();
@@ -172,7 +182,7 @@ var appObj = {
     },
     checkLocalData: function () {
         try {
-            appObj.currentUser.userName = localStorage.getItem("username");
+            appObj.currentUser.userName = sessionStorage.getItem("username");
         } catch (error) {
             console.error(error);
         }
@@ -243,10 +253,9 @@ var appObj = {
                 };
             }
             number = 856;
-            intervalId = setInterval(decrement, 2 * 1000);
+            intervalId = setInterval(decrement, 4000);
         })
     },
-
     Begin: function () {
         $(".nav-item").hide();
         $(".typewriter").hide();

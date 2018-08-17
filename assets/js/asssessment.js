@@ -40,7 +40,7 @@ var gameo = {
         try {
             $(document).off("click");
             //reset variables
-            gameo.currentUser = localStorage.getItem("username");
+            gameo.currentUser = sessionStorage.getItem("username");
             if (gameo.currentUser == "" || gameo.currentUser == null){
                 gameo.forceLogin();
                 return;
@@ -129,7 +129,7 @@ var gameo = {
                 var answer = $("<h3>");
                 answer.attr("id", "answer")
                 answer.attr("data-number", i);
-                answer.text(currentQuestions[i]);
+                answer.html(currentQuestions[i]);
 
                 $("#gamecard").append(answer);
                 $("#gamecard").append($("<br>"));
@@ -161,7 +161,7 @@ var gameo = {
             break;
             case "wrong":
                 var header = $("<h1>");
-                header.text("Wrong! The correct answer was: " + gameo.currentAnswerText);
+                header.html("Wrong! The correct answer was: " + gameo.currentAnswerText);
                 header.attr("id","qheader2");
                 $("#gamecard").empty();
                 $("#gamecard").append(header);
@@ -240,7 +240,7 @@ var gameo = {
                 var answer = $("<h3>");
                 answer.attr("id", "answer")
                 answer.attr("data-number", i);
-                answer.text(gameo.questions.questionOne[i]);
+                answer.html(gameo.questions.questionOne[i]);
 
                 $("#gamecard").append(answer);
                 $("#gamecard").append($("<br>"));

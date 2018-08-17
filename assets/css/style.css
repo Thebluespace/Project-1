@@ -315,5 +315,8 @@ p:last-child:after {
   padding:2%;
 }
   
-
+.rover{
+  height: 240px;
+  width: 240px;
+}
   
