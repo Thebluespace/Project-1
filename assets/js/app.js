@@ -71,11 +71,11 @@ var appObj = {
                         appObj.currentUser.userName = userUser;
                         sessionStorage.setItem("username", userUser);
                         var h1 = $("<h4>");
-                        h1.text("User created successfully!");
+                        h1.text("User created successfully! \n Page will redirect shortly...");
                         $(".newUserDiv").append(h1);
                         setTimeout(function () {
                             $(".newUserDiv").remove();
-                            appObj.loginComplete();
+                            window.location.href = "index.html";
                         }, 1500);
                     }
                 }
@@ -91,7 +91,7 @@ var appObj = {
         appObj.getFromServer();
         appObj.Begin();
 
-        // appObj.checkLocalData(); //local storage added but turned off for debugging
+        appObj.checkLocalData(); //local storage added but turned off for debugging
         database.ref("dbo_users_table/users/" + appObj.currentUser.userName).once("value", function (snapshot) {
             if (snapshot.child("password").exists()) {
                 appObj.loginComplete();
@@ -133,17 +133,15 @@ var appObj = {
             if (appObj.currentUser.userName == "" || appObj.currentUser.userName == null) {
                 var form = $("<h1>");
                 form.text("User is not logged in! Redirecting to landing page...");
-                $("#articles").remove();
-                $("#row").append(form);
+                $("#container").remove();
+                $("#mainDiv").append(form);
                 setTimeout(function () {
                     window.location.href = "index.html";
                 }, 1500);
                 return;
             }
-            $(".articles").hide();
             appObj.newsApiCall();
             appObj.nasaApi();
-            $(".articles").show();
         } catch (error) {
             console.error(error);
         }
@@ -194,24 +192,15 @@ var appObj = {
                 url: queryUrl,
                 method: "GET"
             }).done(function (result) {
-                //console.log(result);
+                console.log(result);
                 var articles = result.articles;
                 for (i = 0; i < 3; i++) {
                     try {
                         if (articles[i].title != "") {
-                            var tr = $("<tr>");
-                            var td = $("<td>");
-                            td.text(articles[i].source.name);
-                            var td1 = $("<td>");
-                            td1.text(articles[i].title);
-                            var anchor = $("<a>");
-                            anchor.attr("target", "_blank");
-                            anchor.attr("href", articles[i].url);
-                            anchor.text("Click here to read");
-                            var td2 = $("<td>");
-                            td2.append(anchor);
-                            tr.append(td, td1, td2);
-                            $(".articleTable").append(tr);
+                            var b = i + 1;
+                            $("#link" + b).attr("href",articles[i].url);
+                            $("#link" + b + "desc").text(articles[i].description);
+                            $("#link" + b + "src").text(articles[i].source.name);
                         }
                     } catch (error) {
                         console.error(error);
@@ -234,6 +223,7 @@ var appObj = {
         }
     },
     nasaApi: function () {
+        $(".roverPics").hide();
         var queryURL = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=dFJonK0i9i110qJccM4dRWZ3bXEgu2U2moofcFHT";
         $.ajax({
             url: queryURL,
@@ -252,6 +242,8 @@ var appObj = {
                     if (number === 0) {
                         number = 856;
                     };
+                    $(".loading").show();
+                    $(".roverPics").show();
                 } catch (err) {
                     console.error(error);
                 }

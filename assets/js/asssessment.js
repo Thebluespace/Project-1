@@ -70,7 +70,7 @@ var gameo = {
             $(form).append($("<br>"));
 
             var sbutton = $("<button>");
-            sbutton.text("Start Game");
+            sbutton.text("Start Assessment");
             sbutton.attr("type", "button");
             sbutton.attr("id","startbutton");
             $(form).append(sbutton);
@@ -161,7 +161,7 @@ var gameo = {
             break;
             case "wrong":
                 var header = $("<h1>");
-                header.html("Wrong! The correct answer was: " + gameo.currentAnswerText);
+                header.html("Wrong! The correct answer was: \n" + gameo.currentAnswerText);
                 header.attr("id","qheader2");
                 $("#gamecard").empty();
                 $("#gamecard").append(header);
@@ -178,7 +178,7 @@ var gameo = {
             case "gameover":
                 var header = $("<h1>");
                 header.attr("id","qheader");
-                header.text("Thanks for playing!");
+                header.text("Here are your results:");
                 var guesses1 = $("<h2>");
                 guesses1.attr("id","qheader2");
                 guesses1.text("Correct Answers: " + gameo.correctAnswers);
@@ -187,10 +187,9 @@ var gameo = {
                 guesses2.text("Wrong Answers: " + gameo.wrongAnswers);
 
                 var sbutton = $("<button>");
-                sbutton.text("Play Again!");
+                sbutton.text("Sign Up");
                 sbutton.attr("type", "button");
                 sbutton.attr("id","startbutton");
-                
 
                 $("#gamecard").empty();
                 $("#gamecard").append($("<br>"));
@@ -200,17 +199,26 @@ var gameo = {
                 $("#gamecard").append($("<br>"));
                 $("#gamecard").append(guesses2);
                 $("#gamecard").append($("<br>"));
-                $("#gamecard").append(sbutton);
-                sbutton.on("click", gameo.startGamme);
+                if (gameo.correctAnswers > 2){
+                    var signup = $("<h1>");
+                    signup.text("You qualify for our space program!\nYou can sign up by clicking below!");
+                    $("#gamecard").append(signup,sbutton);
+                    sbutton.on("click", gameo.startGamme);
+                } else {
+                    var signup = $("<h1>");
+                    signup.text("Sorry, you do not meet the mimnum requirements for the space program. Keep trying!");
+                    $("#gamecard").append(signup,sbutton);
+                    sbutton.on("click", gameo.startGamme);
+                }
                 gameo.uploadResults();
             break;
         }
-
     },
     startGamme: function(event){
         try {
             gameo.currentAnswer = 0;
             gameo.correctAnswers = 0;
+            gameo.currentQuestion = 0;
             gameo.wrongAnswers = 0;
             gameo.gameState = false;
             gameo.currentInterval = "";
