@@ -9,9 +9,7 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 var appObj = {
-    currentUser: {
-        userName: "",
-    },
+    currentUser: "",
     apis: {
     },
     createUserDetails: {
@@ -23,17 +21,9 @@ var appObj = {
             link1: ""
         }
     },
-    signUp: {
-        currentSignUp: {
-            name: "1",
-            email: "1",
-            marsExplanation: "1",
-            skillSet: "1",
-        },
-    },
     userLogin: function (event) {
         var userUser = $(".Username").val();
-        appObj.currentUser.userName = userUser;
+        appObj.currentUser = userUser;
         var userPass = $(".Password").val();
         try {
             database.ref("dbo_users_table/users/" + userUser).once("value", function (ref) {
@@ -73,7 +63,7 @@ var appObj = {
                         "email": email,
                         "password": password
                     });
-                    appObj.currentUser.userName = userUser;
+                    appObj.currentUser = userUser;
                     sessionStorage.setItem("username", userUser);
                     var h1 = $("<h4>");
                     h1.text("User created successfully! \n Page will redirect shortly...");
@@ -96,7 +86,7 @@ var appObj = {
         appObj.getFromServer();
         appObj.Begin();
         appObj.checkLocalData(); //checks session storage
-        database.ref("dbo_users_table/users/" + appObj.currentUser.userName).once("value", function (snapshot) {
+        database.ref("dbo_users_table/users/" + appObj.currentUser).once("value", function (snapshot) {
             if (snapshot.child("password").exists()) {
                 appObj.loginComplete();
                 //user logged in from memory, prevents form from loading.
@@ -135,8 +125,8 @@ var appObj = {
     },
     logLoad: function () {
         try {
-            appObj.currentUser.userName = sessionStorage.getItem("username");
-            if (appObj.currentUser.userName == "" || appObj.currentUser.userName == null) {
+            appObj.currentUser = sessionStorage.getItem("username");
+            if (appObj.currentUser == "" || appObj.currentUser == null) {
                 var form = $("<h1>");
                 form.text("User is not logged in! Redirecting to landing page...");
                 $("#container").remove();
@@ -187,7 +177,7 @@ var appObj = {
     },
     checkLocalData: function () {
         try {
-            appObj.currentUser.userName = sessionStorage.getItem("username");
+            appObj.currentUser = sessionStorage.getItem("username");
         } catch (error) {
             console.error(error);
         }

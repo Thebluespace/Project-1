@@ -491,9 +491,6 @@ p:last-child:after {
   {
      transition-delay: 0.15s;
   }
-
-  
-  
- 
-
-
+  #answer:hover {
+    background-color: blue;
+}

@@ -319,8 +319,14 @@ var gameo = {
             skillSet: $(".skillSet").val(),
         }
         try {
+            $(".submit3button").remove();
             database.ref("app/" + userUser).update({dataset});
-
+            var h1 = $("<label>");
+            h1.text("Application submitted!");
+            $("#gamecard").append(h1);
+            setTimeout(function(){
+                window.location.href = "index.html";
+            },3500);
         } catch (error) {
             console.error(error);
         }
