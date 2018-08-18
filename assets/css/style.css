@@ -33,10 +33,26 @@ height:100%;
 object-fit:contain;
 overflow:hidden;
 max-width: 100%;
-    z-index: 1;
-    border-radius:50%;
-    
+z-index: 1;   
   }
+
+  .rover{
+ align-content: center;
+height: 700px;
+ width: 1000px;
+ border-width:20px;
+ border-color:white;
+ border-radius:50%;
+  }
+
+  .Blink {
+    animation: blinker 1.5s cubic-bezier(.5, 0, 1, 1) infinite alternate;  
+}
+
+@keyframes blinker {  
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
 
  .nav-item {
    z-index: 1;
