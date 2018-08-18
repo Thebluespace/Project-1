@@ -201,12 +201,13 @@ var gameo = {
                 $("#gamecard").append($("<br>"));
                 if (gameo.correctAnswers > 2){
                     var signup = $("<h1>");
-                    signup.text("You qualify for our space program!\nYou can sign up by clicking below!");
+                    signup.html("You qualify for our space program!" + $("<br>") + "You can sign up by clicking below!");
                     $("#gamecard").append(signup,sbutton);
                     sbutton.on("click", gameo.startGamme);
                 } else {
                     var signup = $("<h1>");
                     signup.text("Sorry, you do not meet the mimnum requirements for the space program. Keep trying!");
+                    sbutton.text("Try Again");
                     $("#gamecard").append(signup,sbutton);
                     sbutton.on("click", gameo.startGamme);
                 }
