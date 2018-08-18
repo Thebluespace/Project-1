@@ -201,9 +201,9 @@ var gameo = {
                 $("#gamecard").append($("<br>"));
                 if (gameo.correctAnswers > 2){
                     var signup = $("<h1>");
-                    signup.html("You qualify for our space program!" + $("<br>") + "You can sign up by clicking below!");
+                    signup.html("You qualify for our space program! \n You can sign up by clicking below!");
                     $("#gamecard").append(signup,sbutton);
-                    sbutton.on("click", gameo.startGamme);
+                    sbutton.on("click", gameo.signUp);
                 } else {
                     var signup = $("<h1>");
                     signup.text("Sorry, you do not meet the mimnum requirements for the space program. Keep trying!");
@@ -290,5 +290,39 @@ var gameo = {
         setTimeout(function(){
             window.location.href = "index.html";
         },1500);
+    },
+    signUp: function(){
+        var adduserform = $("<form>")
+        var label4 = $("<label>").text("Please Enter Your Full Name");
+        var userRealName = $("<input>").addClass("realname").attr("type", "text");
+        var label5 = $("<label>").text("Please enter an email");
+        var userEmail = $("<input>").addClass("userEmail").attr("type", "text");
+        var label6 = $("<label>").text("Explain Why You'd Like To Go To Mars");
+        var marsExplanation = $("<textarea>").addClass("marsInput").attr("type", "text");
+        var label7 = $("<label>").text("Please Elaborate On Your Skill Set And Experience");
+        var skillSet = $("<textarea>").addClass("skillSet").attr("type", "text");
+        var submit3 = $("<button>");
+        submit3.text("submit");
+        submit3.attr("type", "button");
+        submit3.addClass("submit3button");
+        submit3.on("click",gameo.userSignUp);
+        adduserform.append(label4, $("<br>"), userRealName, $("<br>"), label5, $("<br>"), userEmail, $("<br>"), label6, $("<br>"), marsExplanation, $("<br>"), label7, $("<br>"), skillSet, $("<br>"), submit3);
+        $("#gamecard").empty();
+        $("#gamecard").append(adduserform);
+    },
+    userSignUp: function(event){
+        var userUser = sessionStorage.getItem("username");
+        var dataset = {
+            name: $(".realname").val(),
+            email: $(".userEmail").val(),
+            marsExplanation: $(".marsInput").val(),
+            skillSet: $(".skillSet").val(),
+        }
+        try {
+            database.ref("app/" + userUser).update({dataset});
+
+        } catch (error) {
+            console.error(error);
+        }
     }
 }

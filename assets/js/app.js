@@ -198,7 +198,7 @@ var appObj = {
                 url: queryUrl,
                 method: "GET"
             }).done(function (result) {
-                console.log(result);
+                //console.log(result);
                 var articles = result.articles;
                 for (i = 0; i < 3; i++) {
                     try {
