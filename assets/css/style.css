@@ -8,8 +8,9 @@ body {
   font-family:space;
   display:fixed;
   justify-content: center;
-  overflow:hidden;
+  overflow:auto;
   position:relative;
+  
 }
 
 a {
@@ -17,18 +18,32 @@ a {
   text-decoration: none;
   background-color: transparent;
   }
+
+  .topnav{
+    background-color: #090;
+    font-size: 100%;
+  }
   
-  .rover{
-    display:block;
+  .roverPics {
+padding:10%;
+margin-top:3%;
+float: center;
+width:120%;
+height:100%;
+object-fit:contain;
+overflow:hidden;
+max-width: 100%;
+    z-index: 1;
+    border-radius:50%;
+    
   }
 
  .nav-item {
    z-index: 1;
+   text-decoration: none;
+  
 }
 
-:root {
-    font-size: calc(1vw + 1vh + 1.5vmin);
-}
 
 .image1 {
   position: inherit;
@@ -39,7 +54,6 @@ a {
     opacity: .25;
   filter: alpha(opacity=60);
 }
-
 
 .loginDiv {
   margin-top: -150%;
@@ -61,8 +75,26 @@ a {
   margin-left: 0%;
   margin-right: 10%;
   margin-top: 10%;
-
 }
+
+.newUserDiv {
+  border:25px;
+  margin-top: -130%;
+  margin-bottom: 0%;
+  margin-left: 40%;
+  text-align: center;
+  background-color: none;
+  opacity: .9;
+  width:25%;
+  -webkit-text-stroke-width: .50px;
+  -webkit-text-stroke-color: black;
+  font-size: 24px;
+  font-family:space;
+}
+.submit2button {
+  margin-top: 100%;
+}
+
 .typewriter{
     display:block;
     padding:2%;
@@ -82,7 +114,7 @@ a {
   border-right: .15em solid orange; /* The typwriter cursor */
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .20em; /* Adjust as needed */
+  letter-spacing: .15em; /* Adjust as needed */
   animation: 
     typing 5s steps(40, end),
     blink-caret .75s step-end;
@@ -96,12 +128,12 @@ overflow: hidden; /* Ensures the content is not revealed until the animation */
 border-right: .15em solid orange; /* The typwriter cursor */
 white-space: nowrap; /* Keeps the content on a single line */
 margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-letter-spacing: .20em; /* Adjust as needed */
+letter-spacing: .12em; /* Adjust as needed */
 animation: 
   typing 3.5s steps(40, end),
   blink-caret .75s step-end;
   max-width:95%;
-  -webkit-animation-delay: 5s;
+  -webkit-animation-delay: 4s;
   -webkit-animation-fill-mode: both;
 }
 .typewriter h3 {
@@ -147,7 +179,7 @@ typing 3.5s steps(40, end),
 blink-caret .75s step-end;
 max-width:95%;  text-shadow:
 0 0 200px rgb(139, 7, 13);
--webkit-animation-delay:11s;
+-webkit-animation-delay:13s;
 -webkit-animation-fill-mode: both;
 }
 .typewriter h5 {
@@ -173,68 +205,39 @@ typing 4s steps(60, end),
 blink-caret .75s step-end;
 max-width:95%;  text-shadow:
 0 0 200px rgb(139, 7, 13);
--webkit-animation-delay: 14s;
+-webkit-animation-delay: 15s;
 -webkit-animation-fill-mode: both;
 
 }
 
 .typewriter h6{
-  padding:2%;
+  display:inline-block;
+  position:fixed;
+  padding-bottom:15%;
   position:absolute;
   color: white;
 font-weight: 485%;
 text-align: center;
 text-transform: uppercase;
-font-size:250%;
-text-shadow: 150%;
+font-size:205%;
+text-shadow: 200%;
 margin-left:10%;
-margin-bottom:-25%;
+margin-bottom:-40%;
 text-shadow:
 0 0 20px rgb(145, 8, 19);
 overflow: hidden; 
 white-space: nowrap;   
 border-right: .15em solid orange; /* The typwriter cursor */
 margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-letter-spacing: .20em; /* Adjust as needed */
+letter-spacing: .55em; /* Adjust as needed */
 animation: 
-typing 3.5s steps(40, end),
+typing 5s steps(40, end),
 blink-caret .75s step-end;
 max-width:95%;  text-shadow:
 0 0 200px rgb(139, 7, 13);
 -webkit-animation-fill-mode: both;
 }
-.newUserDiv {
-  border:25px;
-  margin-top: -130%;
-  margin-bottom: 0%;
-  margin-left: 40%;
-  text-align: center;
-  background-color: none;
-  opacity: .9;
-  width:25%;
-  -webkit-text-stroke-width: .50px;
-  -webkit-text-stroke-color: black;
-  font-size: 24px;
-  font-family:space;
-}
-.submit2button {
-  margin-top: 100%;
-}
 
-#articles {
-display:block;
-padding:20%;
-}
-
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: orange; }
-}
 .screen {
   animation:colorPulse 5s infinite ease-in-out;
   box-shadow:0 0 5% 1% #000 inset;
@@ -275,6 +278,20 @@ p:last-child:after {
   animation:blink 1s infinite;
   content:"_";
 }
+#articles {
+  display:block;
+  padding:20%;
+  }
+  
+  
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+  }
 
 @keyframes colorPulse {
   0%, 100% {
@@ -310,5 +327,143 @@ p:last-child:after {
     opacity:0;
   }
 }
+
+  .loading{
+    float:center;
+    position:absolute;
+    padding-right:100%;
+    padding-top:10%;
+    margin-top:20%;
+  }
+
+  svg {
+    position: absolute;  
+  }
+  
+  circle:nth-of-type(1) { fill: #ffffff; }
+  circle:nth-of-type(2) { fill: #fcd837; }
+  circle:nth-of-type(3) { fill: #f9a11f; }
+  circle:nth-of-type(4) { fill: #f27c21; }
+  
+  #clackers {
+  /*   border: 1px solid white; */
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .wrap
+  {
+    margin:10% auto 0 auto;
+    width:100%;
+    display:flex;
+    align-items:space-around;
+    max-width:100%;
+    margin-left:1.5%;
+
+  }
+  .tile
+  {
+    text-align: center;
+    width:380px;
+    height:380px;
+    margin:10px;
+    background-color:#090;
+    display:inline-block;
+    background-size:cover;
+    position:relative;
+    cursor:pointer;
+    transition: all 0.4s ease-out;
+    box-shadow: 0px 35px 77px -17px rgba(0,0,0,0.44);
+    overflow:hidden;
+    color:white;
+    font-family:'Roboto';
+    border-radius:50%;
+    
+  }
+  .tile img
+  {
+    height:100%;
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:0;
+    transition: all 0.4s ease-out;
+  }
+  .tile .text
+  {
+  /*   z-index:99; */
+    position:absolute;
+    padding:30px;
+    height:calc(100% - 60px);
+  }
+  .tile h1
+  {
+   
+    font-weight:300;
+    margin:0;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+  }
+  .tile h2
+  {
+    font-weight:100;
+    margin:20px 0 0 0;
+    font-style:italic;
+     transform: translateX(200px);
+  }
+  .tile p
+  {
+    font-weight:300;
+    margin:20px 0 0 0;
+    line-height: 25px;
+  /*   opacity:0; */
+    transform: translateX(-200px);
+    transition-delay: 0.2s;
+  }
+  .animate-text
+  {
+    opacity:0;
+    transition: all 0.6s ease-in-out;
+  }
+  .tile:hover
+  {
+  /*   background-color:#99aeff; */
+  box-shadow: 0px 35px 77px -17px rgba(0,0,0,0.64);
+    transform:scale(1.05);
+  }
+  .tile:hover img
+  {
+    opacity: 0.2;
+  }
+  .tile:hover .animate-text
+  {
+    transform:translateX(0);
+    opacity:1;
+  }
+  
+  
+  .tile:hover span
+  {
+    opacity:1;
+    transform:translateY(0px);
+  }
+  
+  .dots span:nth-child(1)
+  {
+     transition-delay: 0.05s;
+  }
+  .dots span:nth-child(2)
+  {
+     transition-delay: 0.1s;
+  }
+  .dots span:nth-child(3)
+  {
+     transition-delay: 0.15s;
+  }
+  
+ 
 
 
