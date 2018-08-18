@@ -23,6 +23,15 @@ var appObj = {
             link1: ""
         }
     },
+    signUp: {
+        currentSignUp: {
+            name: "1",
+            email: "1",
+            marsExplanation: "1",
+            skillSet: "1",
+        },
+    },
+
     userLogin: function (event) {
         var userUser = $(".Username").val();
         appObj.currentUser.userName = userUser;
@@ -198,7 +207,7 @@ var appObj = {
                     try {
                         if (articles[i].title != "") {
                             var b = i + 1;
-                            $("#link" + b).attr("href",articles[i].url);
+                            $("#link" + b).attr("href", articles[i].url);
                             $("#link" + b + "desc").text(articles[i].description);
                             $("#link" + b + "src").text(articles[i].source.name);
                         }
