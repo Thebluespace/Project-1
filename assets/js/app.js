@@ -262,7 +262,6 @@ var appObj = {
         $(".nav-item").hide();
         $(".typewriter").hide();
         $(".articleTable").hide();
-        $(".container-fluid").append(".loginDiv");
         return;
     },
     loginComplete: function () {
