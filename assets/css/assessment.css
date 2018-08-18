@@ -9,3 +9,21 @@
       height: auto;
       z-index: -100;
 }
+
+.gamecontainer{
+text-align: center;
+font-size: 150%;
+-webkit-text-stroke-width: .30px;
+  -webkit-text-stroke-color: rgb(70, 4, 87);
+}
+
+.blinking{
+  animation:blinkingText 0.8s infinite;
+}
+@keyframes blinkingText{
+  0%{     color: #000;    }
+  49%{    color: transparent; }
+  50%{    color: transparent; }
+  99%{    color:transparent;  }
+  100%{   color: #000;    }
+}

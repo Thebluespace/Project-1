@@ -380,12 +380,13 @@ p:last-child:after {
     margin-left:1.5%;
 
   }
-  .tile
-  {
+
+  .tile {
+    font-size:70%;
     text-align: center;
     width:380px;
     height:380px;
-    margin:10px;
+    margin:17px;
     background-color:#090;
     display:inline-block;
     background-size:cover;
@@ -399,8 +400,20 @@ p:last-child:after {
     border-radius:50%;
     
   }
-  .tile img
-  {
+
+  .blinking{
+    animation:blinkingText 0.8s infinite;
+    text-decoration-color:none;
+  }
+  @keyframes blinkingText{
+    0%{     color: rgb(153, 9, 9);    }
+    49%{    color: transparent; }
+    50%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: #000;    }
+  }
+
+  .tile img {
     height:100%;
     width:100%;
     position:absolute;
@@ -411,7 +424,6 @@ p:last-child:after {
   }
   .tile .text
   {
-  /*   z-index:99; */
     position:absolute;
     padding:30px;
     height:calc(100% - 60px);
@@ -479,6 +491,8 @@ p:last-child:after {
   {
      transition-delay: 0.15s;
   }
+
+  
   
  
 
