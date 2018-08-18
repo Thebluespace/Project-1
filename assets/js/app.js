@@ -23,8 +23,6 @@ var appObj = {
             link1: ""
         }
     },
-
-
     userLogin: function (event) {
         var userUser = $(".Username").val();
         appObj.currentUser.userName = userUser;
@@ -34,7 +32,7 @@ var appObj = {
                 var ref = snapshot;
                 if (ref.child("password").exists()) {
                     if (ref.child("password").val() === userPass) {
-                        localStorage.setItem("username", userUser);
+                        sessionStorage.setItem("username", userUser);
                         $(".loginDiv").remove();
                     } else {
                         alert("Incorrect password!");
@@ -71,12 +69,13 @@ var appObj = {
                             "password": password
                         });
                         appObj.currentUser.userName = userUser;
+                        sessionStorage.setItem("username", userUser);
                         var h1 = $("<h4>");
-                        h1.text("User created successfully!");
+                        h1.text("User created successfully! \n Page will redirect shortly...");
                         $(".newUserDiv").append(h1);
                         setTimeout(function () {
                             $(".newUserDiv").remove();
-                            appObj.loginComplete();
+                            window.location.href = "index.html";
                         }, 1500);
                     }
                 }
@@ -91,8 +90,8 @@ var appObj = {
     load: function () {
         appObj.getFromServer();
         appObj.Begin();
-        
-        // appObj.checkLocalData(); //local storage added but turned off for debugging
+
+        appObj.checkLocalData(); //local storage added but turned off for debugging
         database.ref("dbo_users_table/users/" + appObj.currentUser.userName).once("value", function (snapshot) {
             if (snapshot.child("password").exists()) {
                 appObj.loginComplete();
@@ -130,10 +129,19 @@ var appObj = {
     },
     logLoad: function () {
         try {
-            $(".articles").hide();
+            appObj.currentUser.userName = sessionStorage.getItem("username");
+            if (appObj.currentUser.userName == "" || appObj.currentUser.userName == null) {
+                var form = $("<h1>");
+                form.text("User is not logged in! Redirecting to landing page...");
+                $("#container").remove();
+                $("#mainDiv").append(form);
+                setTimeout(function () {
+                    window.location.href = "index.html";
+                }, 1500);
+                return;
+            }
             appObj.newsApiCall();
             appObj.nasaApi();
-            $(".articles").show();
         } catch (error) {
             console.error(error);
         }
@@ -172,7 +180,7 @@ var appObj = {
     },
     checkLocalData: function () {
         try {
-            appObj.currentUser.userName = localStorage.getItem("username");
+            appObj.currentUser.userName = sessionStorage.getItem("username");
         } catch (error) {
             console.error(error);
         }
@@ -183,35 +191,26 @@ var appObj = {
             $.ajax({
                 url: queryUrl,
                 method: "GET"
-            }).done(function(result) {
+            }).done(function (result) {
                 console.log(result);
                 var articles = result.articles;
-                for (i = 0; i < 3; i++){
+                for (i = 0; i < 3; i++) {
                     try {
-                        if (articles[i].title != ""){
-                            var tr = $("<tr>");
-                            var td = $("<td>");
-                            td.text(articles[i].source.name);
-                            var td1 = $("<td>");
-                            td1.text(articles[i].title);
-                            var anchor = $("<a>");
-                            anchor.attr("target","_blank");
-                            anchor.attr("href",articles[i].url);
-                            anchor.text("Click here to read");
-                            var td2 = $("<td>");
-                            td2.append(anchor);
-                            tr.append(td,td1,td2);
-                            $(".articleTable").append(tr);
+                        if (articles[i].title != "") {
+                            var b = i + 1;
+                            $("#link" + b).attr("href",articles[i].url);
+                            $("#link" + b + "desc").text(articles[i].description);
+                            $("#link" + b + "src").text(articles[i].source.name);
                         }
                     } catch (error) {
                         console.error(error);
                     }
                 }
-            }).fail(function(err) {
+            }).fail(function (err) {
                 console.error(err);
             });
         } catch (error) {
-         console.error(error);
+            console.error(error);
         }
     },
     getFromServer: function () {
@@ -224,6 +223,7 @@ var appObj = {
         }
     },
     nasaApi: function () {
+        $(".roverPics").hide();
         var queryURL = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=dFJonK0i9i110qJccM4dRWZ3bXEgu2U2moofcFHT";
         $.ajax({
             url: queryURL,
@@ -231,22 +231,27 @@ var appObj = {
         }).then(function (response) {
             var intervalId;
             function decrement() {
-                number--;
-                var imageURL = response.photos[number].img_src;
-                var imageBuild = $("<img>");
-                var image = imageBuild.attr("src", imageURL);
-                image.addClass("rover");
-                $(".rover").remove();
-                $(".roverPics").append(image);
-                if (number === 0) {
-                    number = 856;
-                };
+                try {
+                    number--;
+                    var imageURL = response.photos[number].img_src;
+                    var image = $("<img>");
+                    image.attr("src", imageURL);
+                    image.addClass("rover");
+                    $(".rover").remove();
+                    $(".roverPics").append(image);
+                    if (number === 0) {
+                        number = 856;
+                    };
+                    $(".loading").show();
+                    $(".roverPics").show();
+                } catch (err) {
+                    console.error(error);
+                }
             }
             number = 856;
-            intervalId = setInterval(decrement, 2 * 1000);
+            intervalId = setInterval(decrement, 4000);
         })
     },
-
     Begin: function () {
         $(".nav-item").hide();
         $(".typewriter").hide();
@@ -268,40 +273,40 @@ var appObj = {
 //googe maps functions
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 0, lng: 0},
-      zoom: 1,
-      streetViewControl: false,
-      mapTypeControlOptions: {
-        mapTypeIds: ['mars']
-      }
+        center: { lat: 0, lng: 0 },
+        zoom: 1,
+        streetViewControl: false,
+        mapTypeControlOptions: {
+            mapTypeIds: ['mars']
+        }
     });
 
     var marsMapType = new google.maps.ImageMapType({
-      getTileUrl: function(coord, zoom) {
-          var mars = {
-            location: "mw1.google.com/mw-planetary/mars/elevation",
-            name: 'elevation',
-            zoomlevels: 9,
-            copyright: 'NASA / JPL / GSFC / Arizona State University',
-            caption: 'A shaded relief map color-coded by altitude'
-          }
-          var link = makeMarsMapType(mars)
-          return link;
-      },
-      tileSize: new google.maps.Size(256, 256),
-      maxZoom: 9,
-      minZoom: 0,
-      radius: 1738000,
-      name: 'mars'
+        getTileUrl: function (coord, zoom) {
+            var mars = {
+                location: "mw1.google.com/mw-planetary/mars/elevation",
+                name: 'elevation',
+                zoomlevels: 9,
+                copyright: 'NASA / JPL / GSFC / Arizona State University',
+                caption: 'A shaded relief map color-coded by altitude'
+            }
+            var link = makeMarsMapType(mars)
+            return link;
+        },
+        tileSize: new google.maps.Size(256, 256),
+        maxZoom: 9,
+        minZoom: 0,
+        radius: 1738000,
+        name: 'mars'
     });
 
     map.mapTypes.set('mars', marsMapType);
     map.setMapTypeId('mars');
-  }
+}
 
-  // Normalizes the coords that tiles repeat across the x axis (horizontally)
-  // like the standard Google map tiles.
-  function getNormalizedCoord(coord, zoom) {
+// Normalizes the coords that tiles repeat across the x axis (horizontally)
+// like the standard Google map tiles.
+function getNormalizedCoord(coord, zoom) {
     var y = coord.y;
     var x = coord.x;
 
@@ -311,63 +316,63 @@ function initMap() {
 
     // don't repeat across y-axis (vertically)
     if (y < 0 || y >= tileRange) {
-      return null;
+        return null;
     }
 
     // repeat across x-axis
     if (x < 0 || x >= tileRange) {
-      x = (x % tileRange + tileRange) % tileRange;
+        x = (x % tileRange + tileRange) % tileRange;
     }
 
-    return {x: x, y: y};
-  }
+    return { x: x, y: y };
+}
 
-  // google maps function
-  function makeMarsMapType(m) {
+// google maps function
+function makeMarsMapType(m) {
     var opts = {
-      baseUrl: 'https://' + m.location + '/',
-      getTileUrl: function(tile, zoom) {
-        var bound = Math.pow(2, zoom);
-        var x = tile.x;
-        var y = tile.y;
-  
-        // Don't repeat across y-axis (vertically).
-        if (y < 0 || y >= bound) {
-          return null;
-        }
-  
-        // Repeat across x-axis.
-        if (x < 0 || x >= bound) {
-          x = (x % bound + bound) % bound;
-        }
-  
-        var qstr = 't';
-        for (var z = 0; z < zoom; z++) {
-          bound = bound / 2;
-          if (y < bound) {
-            if (x < bound) {
-              qstr += 'q';
-            } else {
-              qstr += 'r';
-              x -= bound;
+        baseUrl: 'https://' + m.location + '/',
+        getTileUrl: function (tile, zoom) {
+            var bound = Math.pow(2, zoom);
+            var x = tile.x;
+            var y = tile.y;
+
+            // Don't repeat across y-axis (vertically).
+            if (y < 0 || y >= bound) {
+                return null;
             }
-          } else {
-            if (x < bound) {
-              qstr += 't';
-              y -= bound;
-            } else {
-              qstr += 's';
-              x -= bound;
-              y -= bound;
+
+            // Repeat across x-axis.
+            if (x < 0 || x >= bound) {
+                x = (x % bound + bound) % bound;
             }
-          }
-        }
-        return 'https://' + m.location + '/' + qstr + '.jpg';
-      },
-      tileSize: new google.maps.Size(256, 256),
-      maxZoom: m.zoomlevels - 1,
-      minZoom: 0,
-      name: m.name.charAt(0).toUpperCase() + m.name.substr(1)
+
+            var qstr = 't';
+            for (var z = 0; z < zoom; z++) {
+                bound = bound / 2;
+                if (y < bound) {
+                    if (x < bound) {
+                        qstr += 'q';
+                    } else {
+                        qstr += 'r';
+                        x -= bound;
+                    }
+                } else {
+                    if (x < bound) {
+                        qstr += 't';
+                        y -= bound;
+                    } else {
+                        qstr += 's';
+                        x -= bound;
+                        y -= bound;
+                    }
+                }
+            }
+            return 'https://' + m.location + '/' + qstr + '.jpg';
+        },
+        tileSize: new google.maps.Size(256, 256),
+        maxZoom: m.zoomlevels - 1,
+        minZoom: 0,
+        name: m.name.charAt(0).toUpperCase() + m.name.substr(1)
     };
     return new google.maps.ImageMapType(opts);
 }
