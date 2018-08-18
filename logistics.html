@@ -9,9 +9,6 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous">
-        </script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="assets/js/jquery-ui.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
@@ -24,7 +21,7 @@
 </head>
 
 <body onload="appObj.logLoad();">
-    <div class="row">
+    <div class="row" id="mainDiv">
         <div class="container-fluid" id="container">
             <div class="topnav">
                 <ul class="nav nav-pills nav-fill ">
@@ -50,12 +47,12 @@
                         <h1>
                             Plan
                         </h1>
-                        <h2 class="animate-text">SmartNews</h2>
-                        <p class="animate-text">For decades, NASA has been working to send humans to Mars. Now, the space agency has revealed a detailed
+                        <h2 class="animate-text" id="link1src">SmartNews</h2>
+                        <p class="animate-text" id="link1desc">For decades, NASA has been working to send humans to Mars. Now, the space agency has revealed a detailed
                             plan for how to get there by the 2030s...</p>
                         <br>
                         <a class="btn btn-light btn-sm" target="blank" href="https://www.smithsonianmag.com/smart-news/heres-how-nasa-wants-get-mars-180956895/.html"
-                            role="button">Learn more</a>
+                            role="button" id="link1">Learn more</a>
                         <div class="dots">
                             <span></span>
                             <span></span>
@@ -70,12 +67,12 @@
                         <h1>
                             Travel
                         </h1>
-                        <h2 class="animate-text">Space.com</h2>
-                        <p class="animate-text"> If you wanted to pay a visit to the red planet, how long would it take? The answer depends on a number
+                        <h2 class="animate-text" id="link2src">Space.com</h2>
+                        <p class="animate-text" id="link2desc"> If you wanted to pay a visit to the red planet, how long would it take? The answer depends on a number
                             of things, ranging from the position of...</p>
                         <br>
                         <a class="btn btn-light btn-sm" target="blank" href="https://www.space.com/24701-how-long-does-it-take-to-get-to-mars.html"
-                            role="button">Learn more</a>
+                            role="button" id="link2">Learn more</a>
                         <div class="dots">
                             <span></span>
                             <span></span>
@@ -90,12 +87,12 @@
                         <h1>
                             Colonize
                         </h1>
-                        <h2 class="animate-text">PBS.org</h2>
-                        <p class="animate-text"> Amidst rising global nuclear tensions, SpaceX and Tesla founder Elon Musk is calling for drastic
+                        <h2 class="animate-text" id="link3src">PBS.org</h2>
+                        <p class="animate-text" id="link3desc"> Amidst rising global nuclear tensions, SpaceX and Tesla founder Elon Musk is calling for drastic
                             action. He wants humans to colonize Mars—stat...</p>
                         <br>
                         <a class="btn btn-light btn-sm" target="blank" href="http://www.pbs.org/wgbh/nova/next/space/want-to-live-in-a-treehouse-on-mars/"
-                            role="button">Learn more</a>
+                            role="button" id="link3">Learn more</a>
                         <div class="dots">
                             <span></span>
                             <span></span>
