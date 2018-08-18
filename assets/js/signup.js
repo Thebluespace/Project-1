@@ -14,7 +14,7 @@ var signUpApp = {
         submit3.text("submit");
         submit3.attr("type", "button");
         submit3.addClass("submit3button");
-        submit3.on("click", );
+        submit3.on("click",signUpApp.userSignUp);
         adduserform.append(label4, $("<br>"), userRealName, $("<br>"), label5, $("<br>"), userEmail, $("<br>"), label6, $("<br>"), marsExplanation, $("<br>"), label7, $("<br>"), skillSet, $("<br>"), submit3, );
         var newUserDiv = $("<div>").addClass("newUserDiv");
         $(newUserDiv).append(adduserform);
@@ -22,30 +22,22 @@ var signUpApp = {
         console.log("fired");
 
     },
-    // userLogin: function (event) {
-    //     var userUser = $(".Username").val();
-    //     appObj.currentUser.userName = userUser;
-    //     var userPass = $(".Password").val();
-    //     try {
-    //         database.ref("dbo_users_table/users/" + userUser).once("value", function (snapshot) {
-    //             var ref = snapshot;
-    //             if (ref.child("password").exists()) {
-    //                 if (ref.child("password").val() === userPass) {
-    //                     sessionStorage.setItem("username", userUser);
-    //                     $(".loginDiv").remove();
-    //                 } else {
-    //                     alert("Incorrect password!");
-    //                 }
-    //             } else {
-    //                 alert("user does not exist!");
-    //             }
-    //             appObj.loginComplete();
-    //         });
+    userSignUp: function (event) {
+        var userUser = sessionStorage.getItem("username");
+        var dataset = {
+            name: $(".realname").val(),
+            email: $(".userEmail").val(),
+            marsExplanation: $(".marsInput").val(),
+            skillSet: $(".skilset").val(),
+        },
+        
+        try {
+            database.ref("app/" + userUser).update({dataset});
 
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // },
+        } catch (error) {
+            console.error(error);
+        }
+    },
 
 
 
