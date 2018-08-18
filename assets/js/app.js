@@ -156,6 +156,7 @@ var appObj = {
         try {
             $(".loginDiv").remove();
             var adduserform = $("<form>");
+            adduserform.addClass("createUserDiv");
             var label2 = $("<label>");
             label2.text("Enter New Username");
             var label3 = $("<label>");
