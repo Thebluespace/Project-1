@@ -69,7 +69,7 @@ var appObj = {
                             "password": password
                         });
                         appObj.currentUser.userName = userUser;
-                        sessionStorage.setItem("username",userUser);
+                        sessionStorage.setItem("username", userUser);
                         var h1 = $("<h4>");
                         h1.text("User created successfully!");
                         $(".newUserDiv").append(h1);
@@ -90,7 +90,7 @@ var appObj = {
     load: function () {
         appObj.getFromServer();
         appObj.Begin();
-        
+
         // appObj.checkLocalData(); //local storage added but turned off for debugging
         database.ref("dbo_users_table/users/" + appObj.currentUser.userName).once("value", function (snapshot) {
             if (snapshot.child("password").exists()) {
@@ -130,14 +130,14 @@ var appObj = {
     logLoad: function () {
         try {
             appObj.currentUser.userName = sessionStorage.getItem("username");
-            if (appObj.currentUser.userName == "" || appObj.currentUser.userName == null){
+            if (appObj.currentUser.userName == "" || appObj.currentUser.userName == null) {
                 var form = $("<h1>");
                 form.text("User is not logged in! Redirecting to landing page...");
                 $("#articles").remove();
                 $("#row").append(form);
-                setTimeout(function(){
-                window.location.href = "index.html";
-                },1500);
+                setTimeout(function () {
+                    window.location.href = "index.html";
+                }, 1500);
                 return;
             }
             $(".articles").hide();
@@ -193,35 +193,35 @@ var appObj = {
             $.ajax({
                 url: queryUrl,
                 method: "GET"
-            }).done(function(result) {
+            }).done(function (result) {
                 //console.log(result);
                 var articles = result.articles;
-                for (i = 0; i < 3; i++){
+                for (i = 0; i < 3; i++) {
                     try {
-                        if (articles[i].title != ""){
+                        if (articles[i].title != "") {
                             var tr = $("<tr>");
                             var td = $("<td>");
                             td.text(articles[i].source.name);
                             var td1 = $("<td>");
                             td1.text(articles[i].title);
                             var anchor = $("<a>");
-                            anchor.attr("target","_blank");
-                            anchor.attr("href",articles[i].url);
+                            anchor.attr("target", "_blank");
+                            anchor.attr("href", articles[i].url);
                             anchor.text("Click here to read");
                             var td2 = $("<td>");
                             td2.append(anchor);
-                            tr.append(td,td1,td2);
+                            tr.append(td, td1, td2);
                             $(".articleTable").append(tr);
                         }
                     } catch (error) {
                         console.error(error);
                     }
                 }
-            }).fail(function(err) {
+            }).fail(function (err) {
                 console.error(err);
             });
         } catch (error) {
-         console.error(error);
+            console.error(error);
         }
     },
     getFromServer: function () {
@@ -252,7 +252,7 @@ var appObj = {
                     if (number === 0) {
                         number = 856;
                     };
-                } catch(err){
+                } catch (err) {
                     console.error(error);
                 }
             }
@@ -281,40 +281,40 @@ var appObj = {
 //googe maps functions
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 0, lng: 0},
-      zoom: 1,
-      streetViewControl: false,
-      mapTypeControlOptions: {
-        mapTypeIds: ['mars']
-      }
+        center: { lat: 0, lng: 0 },
+        zoom: 1,
+        streetViewControl: false,
+        mapTypeControlOptions: {
+            mapTypeIds: ['mars']
+        }
     });
 
     var marsMapType = new google.maps.ImageMapType({
-      getTileUrl: function(coord, zoom) {
-          var mars = {
-            location: "mw1.google.com/mw-planetary/mars/elevation",
-            name: 'elevation',
-            zoomlevels: 9,
-            copyright: 'NASA / JPL / GSFC / Arizona State University',
-            caption: 'A shaded relief map color-coded by altitude'
-          }
-          var link = makeMarsMapType(mars)
-          return link;
-      },
-      tileSize: new google.maps.Size(256, 256),
-      maxZoom: 9,
-      minZoom: 0,
-      radius: 1738000,
-      name: 'mars'
+        getTileUrl: function (coord, zoom) {
+            var mars = {
+                location: "mw1.google.com/mw-planetary/mars/elevation",
+                name: 'elevation',
+                zoomlevels: 9,
+                copyright: 'NASA / JPL / GSFC / Arizona State University',
+                caption: 'A shaded relief map color-coded by altitude'
+            }
+            var link = makeMarsMapType(mars)
+            return link;
+        },
+        tileSize: new google.maps.Size(256, 256),
+        maxZoom: 9,
+        minZoom: 0,
+        radius: 1738000,
+        name: 'mars'
     });
 
     map.mapTypes.set('mars', marsMapType);
     map.setMapTypeId('mars');
-  }
+}
 
-  // Normalizes the coords that tiles repeat across the x axis (horizontally)
-  // like the standard Google map tiles.
-  function getNormalizedCoord(coord, zoom) {
+// Normalizes the coords that tiles repeat across the x axis (horizontally)
+// like the standard Google map tiles.
+function getNormalizedCoord(coord, zoom) {
     var y = coord.y;
     var x = coord.x;
 
@@ -324,63 +324,63 @@ function initMap() {
 
     // don't repeat across y-axis (vertically)
     if (y < 0 || y >= tileRange) {
-      return null;
+        return null;
     }
 
     // repeat across x-axis
     if (x < 0 || x >= tileRange) {
-      x = (x % tileRange + tileRange) % tileRange;
+        x = (x % tileRange + tileRange) % tileRange;
     }
 
-    return {x: x, y: y};
-  }
+    return { x: x, y: y };
+}
 
-  // google maps function
-  function makeMarsMapType(m) {
+// google maps function
+function makeMarsMapType(m) {
     var opts = {
-      baseUrl: 'https://' + m.location + '/',
-      getTileUrl: function(tile, zoom) {
-        var bound = Math.pow(2, zoom);
-        var x = tile.x;
-        var y = tile.y;
-  
-        // Don't repeat across y-axis (vertically).
-        if (y < 0 || y >= bound) {
-          return null;
-        }
-  
-        // Repeat across x-axis.
-        if (x < 0 || x >= bound) {
-          x = (x % bound + bound) % bound;
-        }
-  
-        var qstr = 't';
-        for (var z = 0; z < zoom; z++) {
-          bound = bound / 2;
-          if (y < bound) {
-            if (x < bound) {
-              qstr += 'q';
-            } else {
-              qstr += 'r';
-              x -= bound;
+        baseUrl: 'https://' + m.location + '/',
+        getTileUrl: function (tile, zoom) {
+            var bound = Math.pow(2, zoom);
+            var x = tile.x;
+            var y = tile.y;
+
+            // Don't repeat across y-axis (vertically).
+            if (y < 0 || y >= bound) {
+                return null;
             }
-          } else {
-            if (x < bound) {
-              qstr += 't';
-              y -= bound;
-            } else {
-              qstr += 's';
-              x -= bound;
-              y -= bound;
+
+            // Repeat across x-axis.
+            if (x < 0 || x >= bound) {
+                x = (x % bound + bound) % bound;
             }
-          }
-        }
-        return 'https://' + m.location + '/' + qstr + '.jpg';
-      },
-      tileSize: new google.maps.Size(256, 256),
-      maxZoom: m.zoomlevels - 1,
-      minZoom: 0,
-      name: m.name.charAt(0).toUpperCase() + m.name.substr(1)
+
+            var qstr = 't';
+            for (var z = 0; z < zoom; z++) {
+                bound = bound / 2;
+                if (y < bound) {
+                    if (x < bound) {
+                        qstr += 'q';
+                    } else {
+                        qstr += 'r';
+                        x -= bound;
+                    }
+                } else {
+                    if (x < bound) {
+                        qstr += 't';
+                        y -= bound;
+                    } else {
+                        qstr += 's';
+                        x -= bound;
+                        y -= bound;
+                    }
+                }
+            }
+            return 'https://' + m.location + '/' + qstr + '.jpg';
+        },
+        tileSize: new google.maps.Size(256, 256),
+        maxZoom: m.zoomlevels - 1,
+        minZoom: 0,
+        name: m.name.charAt(0).toUpperCase() + m.name.substr(1)
     };
     return new google.maps.ImageMapType(opts);
 }
