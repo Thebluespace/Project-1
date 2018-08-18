@@ -23,6 +23,15 @@ var appObj = {
             link1: ""
         }
     },
+    signUp: {
+        currentSignUp: {
+            name: "1",
+            email: "1",
+            marsExplanation: "1",
+            skillSet: "1",
+        },
+    },
+
     userLogin: function (event) {
         var userUser = $(".Username").val();
         appObj.currentUser.userName = userUser;
@@ -199,7 +208,7 @@ var appObj = {
                     try {
                         if (articles[i].title != "") {
                             var b = i + 1;
-                            $("#link" + b).attr("href",articles[i].url);
+                            $("#link" + b).attr("href", articles[i].url);
                             $("#link" + b + "desc").text(articles[i].description);
                             $("#link" + b + "src").text(articles[i].source.name);
                         }
@@ -269,4 +278,115 @@ var appObj = {
         $(".newUserDiv").hide();
         return;
     },
+<<<<<<< HEAD
 };
+=======
+};
+
+//googe maps functions
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 0, lng: 0 },
+        zoom: 1,
+        streetViewControl: false,
+        mapTypeControlOptions: {
+            mapTypeIds: ['mars']
+        }
+    });
+
+    var marsMapType = new google.maps.ImageMapType({
+        getTileUrl: function (coord, zoom) {
+            var mars = {
+                location: "mw1.google.com/mw-planetary/mars/elevation",
+                name: 'elevation',
+                zoomlevels: 9,
+                copyright: 'NASA / JPL / GSFC / Arizona State University',
+                caption: 'A shaded relief map color-coded by altitude'
+            }
+            var link = makeMarsMapType(mars)
+            return link;
+        },
+        tileSize: new google.maps.Size(256, 256),
+        maxZoom: 9,
+        minZoom: 0,
+        radius: 1738000,
+        name: 'mars'
+    });
+
+    map.mapTypes.set('mars', marsMapType);
+    map.setMapTypeId('mars');
+}
+
+// Normalizes the coords that tiles repeat across the x axis (horizontally)
+// like the standard Google map tiles.
+function getNormalizedCoord(coord, zoom) {
+    var y = coord.y;
+    var x = coord.x;
+
+    // tile range in one direction range is dependent on zoom level
+    // 0 = 1 tile, 1 = 2 tiles, 2 = 4 tiles, 3 = 8 tiles, etc
+    var tileRange = 1 << zoom;
+
+    // don't repeat across y-axis (vertically)
+    if (y < 0 || y >= tileRange) {
+        return null;
+    }
+
+    // repeat across x-axis
+    if (x < 0 || x >= tileRange) {
+        x = (x % tileRange + tileRange) % tileRange;
+    }
+
+    return { x: x, y: y };
+}
+
+// google maps function
+function makeMarsMapType(m) {
+    var opts = {
+        baseUrl: 'https://' + m.location + '/',
+        getTileUrl: function (tile, zoom) {
+            var bound = Math.pow(2, zoom);
+            var x = tile.x;
+            var y = tile.y;
+
+            // Don't repeat across y-axis (vertically).
+            if (y < 0 || y >= bound) {
+                return null;
+            }
+
+            // Repeat across x-axis.
+            if (x < 0 || x >= bound) {
+                x = (x % bound + bound) % bound;
+            }
+
+            var qstr = 't';
+            for (var z = 0; z < zoom; z++) {
+                bound = bound / 2;
+                if (y < bound) {
+                    if (x < bound) {
+                        qstr += 'q';
+                    } else {
+                        qstr += 'r';
+                        x -= bound;
+                    }
+                } else {
+                    if (x < bound) {
+                        qstr += 't';
+                        y -= bound;
+                    } else {
+                        qstr += 's';
+                        x -= bound;
+                        y -= bound;
+                    }
+                }
+            }
+            return 'https://' + m.location + '/' + qstr + '.jpg';
+        },
+        tileSize: new google.maps.Size(256, 256),
+        maxZoom: m.zoomlevels - 1,
+        minZoom: 0,
+        name: m.name.charAt(0).toUpperCase() + m.name.substr(1)
+    };
+    return new google.maps.ImageMapType(opts);
+}
+>>>>>>> c791a89a58a816b53a9d430f241f01c6a4a0c770
