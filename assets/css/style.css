@@ -9,8 +9,7 @@ body {
   display:fixed;
   justify-content: center;
   overflow:auto;
-  position:relative;
-  
+  position:relative; 
 }
 
 a {
@@ -23,6 +22,10 @@ a {
     background-color: #090;
     font-size: 100%;
   }
+  .nav-item {
+    z-index: 1;
+    text-decoration: none;
+ }
   
   .roverPics {
 padding:10%;
@@ -46,7 +49,7 @@ height: 700px;
   }
 
   .Blink {
-    animation: blinker 1.5s cubic-bezier(.5, 0, 1, 1) infinite alternate;  
+    animation: blinker 5s cubic-bezier(.5, 0, 1, 1) infinite alternate;  
 }
 
 @keyframes blinker {  
@@ -54,16 +57,8 @@ height: 700px;
   to { opacity: 0; }
 }
 
- .nav-item {
-   z-index: 1;
-   text-decoration: none;
-  
-}
-
-
 .image1 {
-  position: inherit;
-    display:block;
+    display:inline-flex;
     padding:20%;
     margin-left:0%;
     margin-top: -33%;
@@ -72,43 +67,138 @@ height: 700px;
 }
 
 .loginDiv {
-  margin-top: -150%;
-  padding-bottom: 10%;
+  -webkit-text-stroke-width: .1px;
+  -webkit-text-stroke-color: rgb(8, 51, 4);
+  margin-top: -166%;
   margin-bottom: 0%;
-  margin-left: 40%;
+  margin-left: 0%;
   text-align: center;
   background-color: none; 
   opacity: .9;
-  width:25%;
-  -webkit-text-stroke-width: 100%;
-  -webkit-text-stroke-color: black;
-  font-size: 24px;
-  font-family:space;
-  z-index: 1;
+  width:-25%;
+  font-size: 160%;
+  font-weight:250%;
+  font-family:courier;
+
 }
+
+.Username{
+  border-radius:2%;
+  border-color:white;
+  border-width: 3px;
+  background-color:black;
+  color:#090;
+}
+
+.Password{
+  border-radius:2%;
+  border-color:white;
+  border-width: 3px;
+  background-color:black;
+  color:#090;
+}
+
 .loginButton {
-  height: 45%;
-  margin-left: 0%;
-  margin-right: 10%;
-  margin-top: 10%;
+  float:left;
+  margin-left: 30%;
+  margin-right: 5%;
+  margin-top: 3%;
+  border-radius:3%;
+  font-family:courier;
+  border-color:#090;
+  border-width: 2px;
+  color:white;
+  background-color:#090;
+  text-shadow: 1px 1px 1px black;
+}
+
+.loginButton:hover {
+  background-color:#090;
+  text-shadow:50%;
+  color:white;
+  border-color:white;
+  border-width:5px;
+  text-shadow: 1px 1px 1px black;
+}
+
+.newUserForm{
+  color:white;
+  text-shadow: 1px 1px 1px #090,
+               3px 3px 5px rgb(1, 66, 1);
+}
+
+.createUserDiv{
+  color:white;
+  text-shadow: 1px 1px 1px #090,
+               3px 3px 5px rgb(1, 66, 1);
+}
+
+.newUserName , .realname, .userEmail, .newPassword {
+  border-radius:3%;
+  border-color:white;
+  border-width:4px;
+  background-color:black;
+  color:#090;
+  font-family: courier;
+  }
+
+.adduserbutton{
+display:block;
+margin-top:3%;
+margin-left: 37%;
+margin-right: 0%;
+  border-color:white;
+  border-width:0px;
+  background-color:#090;
+  color:white;
+  text-shadow: 1px 1px 1px black;
+}
+
+.adduserbutton:hover{
+  background-color:#090;
+  color:white;
+  border-color:white;
+  border-width:5px;
+  text-shadow: 1px 1px 1px black;
+  box-shadow: 1px 1px 1px white;
+  box-shadow: 3px 3px 5px black;
 }
 
 .newUserDiv {
-  border:25px;
-  margin-top: -130%;
+  color:white;
+  font-weight:500%;
+  margin-top: -170%;
   margin-bottom: 0%;
-  margin-left: 40%;
+  margin-left: 0%;
   text-align: center;
-  background-color: none;
+  background-color:none;
   opacity: .9;
-  width:25%;
-  -webkit-text-stroke-width: .50px;
-  -webkit-text-stroke-color: black;
-  font-size: 24px;
-  font-family:space;
+  width:-25%;
+  -webkit-text-stroke-width: 0px;
+  -webkit-text-stroke-color:#090;
+  font-size: 125%;
+  font-family:courier;
+  border-color:white;
+  border-width:1px;
 }
+
 .submit2button {
-  margin-top: 100%;
+  margin-top: 3%;
+  border-color:white;
+  background-color:green;
+  border-width: 4px;
+  color:white;
+  text-shadow: 1px 1px 1px black;
+  padding:10px;
+}
+
+.submit2button:hover{
+  background-color:#090;
+  color:white;
+  border-color:white;
+  border-width:5px;
+  text-shadow: 1px 1px 1px black;
+  padding:20px;
 }
 
 .typewriter{
@@ -126,11 +216,11 @@ height: 700px;
   color: white;
   font-family: monospace;
   font-size:111%;
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: .15em solid orange; /* The typwriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .15em; /* Adjust as needed */
+  overflow: hidden; 
+  border-right: .15em solid orange; 
+  white-space: nowrap; 
+  margin: 0 auto; 
+  letter-spacing: .15em; 
   animation: 
     typing 5s steps(40, end),
     blink-caret .75s step-end;
@@ -144,7 +234,7 @@ overflow: hidden; /* Ensures the content is not revealed until the animation */
 border-right: .15em solid orange; /* The typwriter cursor */
 white-space: nowrap; /* Keeps the content on a single line */
 margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-letter-spacing: .12em; /* Adjust as needed */
+letter-spacing: .12em; 
 animation: 
   typing 3.5s steps(40, end),
   blink-caret .75s step-end;
@@ -157,11 +247,11 @@ display:   block;
   color: white;
   font-family: monospace;
   font-size:111%;
-overflow: hidden; /* Ensures the content is not revealed until the animation */
-border-right: .15em solid orange; /* The typwriter cursor */
-white-space: nowrap; /* Keeps the content on a single line */
-margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-letter-spacing: .20em; /* Adjust as needed */
+overflow: hidden; 
+border-right: .15em solid orange; 
+white-space: nowrap; 
+margin: 0 auto; 
+letter-spacing: .20em; 
 animation: 
   typing 3.5s steps(40, end),
   blink-caret .75s step-end;
@@ -169,7 +259,7 @@ animation:
   0 0 200px rgb(139, 7, 13);
   text-shadow: 150%;
   font-weight: 485%;
-    -webkit-animation-delay:8s;
+    -webkit-animation-delay:7s;
   -webkit-animation-fill-mode: both;
 }
 .typewriter h4{
@@ -187,15 +277,15 @@ text-shadow:
 0 0 20px rgb(145, 8, 19);
 overflow: hidden; 
 white-space: nowrap;   
-border-right: .15em solid orange; /* The typwriter cursor */
-margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-letter-spacing: .20em; /* Adjust as needed */
+border-right: .15em solid orange; 
+margin: 0 auto; 
+letter-spacing: .20em;
 animation: 
 typing 3.5s steps(40, end),
 blink-caret .75s step-end;
 max-width:95%;  text-shadow:
 0 0 200px rgb(139, 7, 13);
--webkit-animation-delay:13s;
+-webkit-animation-delay:11s;
 -webkit-animation-fill-mode: both;
 }
 .typewriter h5 {
@@ -213,19 +303,17 @@ text-shadow:
 0 0 20px rgb(145, 8, 19);
 overflow: hidden; 
 white-space: nowrap;   
-border-right: .15em solid orange; /* The typwriter cursor */
-margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-letter-spacing: .70em; /* Adjust as needed */
+border-right: .15em solid orange;
+margin: 0 auto; 
+letter-spacing: .70em; 
 animation: 
 typing 4s steps(60, end),
 blink-caret .75s step-end;
 max-width:95%;  text-shadow:
 0 0 200px rgb(139, 7, 13);
--webkit-animation-delay: 15s;
+-webkit-animation-delay: 13s;
 -webkit-animation-fill-mode: both;
-
 }
-
 .typewriter h6{
   display:inline-block;
   position:fixed;
@@ -243,9 +331,9 @@ text-shadow:
 0 0 20px rgb(145, 8, 19);
 overflow: hidden; 
 white-space: nowrap;   
-border-right: .15em solid orange; /* The typwriter cursor */
-margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-letter-spacing: .55em; /* Adjust as needed */
+border-right: .15em solid orange; 
+margin: 0 auto; 
+letter-spacing: .55em; 
 animation: 
 typing 5s steps(40, end),
 blink-caret .75s step-end;
@@ -356,6 +444,7 @@ p:last-child:after {
     position: absolute;  
   }
   
+
   circle:nth-of-type(1) { fill: #ffffff; }
   circle:nth-of-type(2) { fill: #fcd837; }
   circle:nth-of-type(3) { fill: #f9a11f; }
@@ -378,10 +467,10 @@ p:last-child:after {
     align-items:space-around;
     max-width:100%;
     margin-left:1.5%;
-
   }
 
   .tile {
+    float:center;
     font-size:70%;
     text-align: center;
     width:380px;
@@ -491,6 +580,57 @@ p:last-child:after {
   {
      transition-delay: 0.15s;
   }
+
+  
+  .answer{
+    display:inline;
+  }
+
+
   #answer:hover {
-    background-color: blue;
+    background-color:#090;
+    align-content:center;
+    border-color:white;
+    border-width:1px;
+   }
+
+#timer{
+  font-size:275%;
+}
+
+.blinking{
+  animation:blinkingText 0.8s infinite;
+  font-size:50px;
+
+}
+@keyframes blinkingText{
+  0%{     color: rgb(247, 239, 239);    }
+  49%{    color: transparent; }
+  50%{    color: transparent; }
+  99%{    color:transparent;  }
+  100%{   color: red;    }
+}
+
+.column {
+  float: center;
+  width: 33.33%;
+  padding: 5px;
+  margin-bottom:50%;
+}
+
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.devin{
+  text-align:center;
+  margin-left:15%;
+  font-size: 37px;
+  -webkit-text-stroke-width: .1px;
+  -webkit-text-stroke-color:red;
+  text-shadow: 1px 1px 1px black;
+  margin-top: 0%;
 }

@@ -1,29 +1,40 @@
 #video-background {
     /*  making the video fullscreen  */
       position: fixed;
+      left:0;
       right: 0; 
       bottom: 0;
       min-width: 100%; 
       min-height: 100%;
-      width: auto; 
       height: auto;
-      z-index: -100;
+      z-index: -90;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      overflow:hidden;
 }
+
 
 .gamecontainer{
 text-align: center;
-font-size: 150%;
+font-size: 140%;
 -webkit-text-stroke-width: .30px;
   -webkit-text-stroke-color: rgb(70, 4, 87);
 }
 
-.blinking{
-  animation:blinkingText 0.8s infinite;
+#startbutton {
+  border-color:#090;
+  border-width: 2px;
+  color:white;
+  background-color:#090;
+  text-shadow: 1px 1px 1px black;
 }
-@keyframes blinkingText{
-  0%{     color: #000;    }
-  49%{    color: transparent; }
-  50%{    color: transparent; }
-  99%{    color:transparent;  }
-  100%{   color: #000;    }
+
+#startbutton:hover {
+  background-color:#090;
+  text-shadow:50%;
+  color:white;
+  border-color:white;
+  border-width:3px;
+  text-shadow: 1px 1px 1px black;
 }
