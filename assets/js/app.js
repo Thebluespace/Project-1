@@ -47,12 +47,12 @@ var appObj = {
         var userUser = $(".newUserName").val();
         try {
             if ($(".newUserName").val() == "" || $(".newRealName").val() == "" || $(".newEmail").val() == "" || $(".newPassword").val() == "") {
-                alert("Please make sure all fields are filled!");
+                $(".loginState").text("Please fill out all fields!");
                 return;
             } else {
             database.ref("dbo_users_table/users").once("value", function (snapshot){
                 if (snapshot.child(userUser).exists()) {
-                    alert("Username already taken!");
+                    $(".loginState").text("User Already Exists!");
                 } else {
                     //get user details from page
                     var name = $(".realname").val();
@@ -65,8 +65,7 @@ var appObj = {
                     });
                     appObj.currentUser = userUser;
                     sessionStorage.setItem("username", userUser);
-                    var h1 = $("<h4>");
-                    h1.text("User created successfully! \n Page will redirect shortly...");
+                    $(".loginState").text("User created successfully! \n Page will redirect shortly...");
                     $(".newUserDiv").append(h1);
                     setTimeout(function () {
                         $(".newUserDiv").remove();
@@ -166,7 +165,9 @@ var appObj = {
             submit2.attr("type", "button");
             submit2.addClass("submit2button");
             submit2.on("click", appObj.createUser);
-            adduserform.append(label2, $("<br>"), newUserName, $("<br>"), label4, $("<br>"), userRealName, $("<br>"), label5, $("<br>"), userEmail, $("<br>"), label3, $("<br>"), newPassword, $("<br>"), submit2, );
+            var state = $("<label>");
+            state.addClass("loginState");
+            adduserform.append(label2, $("<br>"), newUserName, $("<br>"), label4, $("<br>"), userRealName, $("<br>"), label5, $("<br>"), userEmail, $("<br>"), label3, $("<br>"), newPassword, $("<br>"), submit2,$("<br>"),state);
             var newUserDiv = $("<div>").addClass("newUserDiv");
             $(newUserDiv).append(adduserform);
             $("#container").append(newUserDiv);
@@ -239,7 +240,7 @@ var appObj = {
                     if (number === 0) {
                         number = 856;
                     };
-                    $(".loading").show();
+                    $(".loading").hide();
                     $(".roverPics").show();
                 } catch (err) {
                     console.error(error);
