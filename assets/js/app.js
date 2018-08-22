@@ -239,7 +239,7 @@ var appObj = {
                     if (number === 0) {
                         number = 856;
                     };
-                    $(".loading").show();
+                    $(".loading").hide();
                     $(".roverPics").show();
                 } catch (err) {
                     console.error(error);
