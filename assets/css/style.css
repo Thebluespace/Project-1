@@ -636,3 +636,7 @@ p:last-child:after {
   text-shadow: 1px 1px 1px black;
   margin-top: 0%;
 }
+
+#gamecard {
+  margin-top: 5%;
+}

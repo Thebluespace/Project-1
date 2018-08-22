@@ -2,8 +2,8 @@ var gameo = {
     questions: {
         questionOne: ["What is the Gravity on Mars?", "9.807 m/s&#178", "3.711 m/s&#178","24.79 m/s&#178","1.62 m/s&#178", 2],
         questionTwo: ["How cold is space?", "12&deg; Fahrenheit", "12&deg; Celsius","2.7&deg; Kelvin","2.7&deg; Fahrenheit", 3],
-        questionThree: ["How many hours of pilot-in-command on a jetcraft are needed?", "1,000 Hours", "1,500 Hours","800 Hours","5 Hours", 1],
-        questionFour: ["What minimun visual acutity to pass the eye test?","15/20","20/10","20/20","25/25", 3],
+        questionThree: ["How many hours of pilot-in-command experience on a jetcraft are needed?", "1,000 Hours", "1,500 Hours","800 Hours","5 Hours", 1],
+        questionFour: ["What minimum visual acutity is required to pass the eye test?","15/20","20/10","20/20","25/25", 3],
         questionFive: ["How long could you survive in open space if you were holding a oxygen producing plant?" ,"6 Minutes", "45 Minutes", "15 Minutes","Oh he ded",4],
     },
     currentUser: "",
